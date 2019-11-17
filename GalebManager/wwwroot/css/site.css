@@ -1,56 +1,211 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+﻿:root {
+    --blue: #4e73df;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --red: #e74a3b;
+    --orange: #fd7e14;
+    --yellow: #f6c23e;
+    --green: #1cc88a;
+    --teal: #20c9a6;
+    --cyan: #36b9cc;
+    --white: #fff;
+    --gray: #858796;
+    --gray-dark: #5a5c69;
+    --primary: #4285F4;
+    --secondary: #858796;
+    --success: #1cc88a;
+    --info: #36b9cc;
+    --warning: #f6c23e;
+    --danger: #e74a3b;
+    --light: #f8f9fc;
+    --dark: #5a5c69;
+    --black: #111113;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+body, html {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    background: var(--light);
+    font-family: "Poppins", sans-serif;
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+    color: var(--dark);
 }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+/* =================================
+         Top Navigation
+================================= */
+
+.navbar {
+    box-shadow: rgba(58, 59, 69, 0.15) 0px 2.4px 28px 0px;
+    height: 7vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999999 !important;
+    background: #fff;
 }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+.navbar-brand {
+    text-transform: uppercase;
+    color: var(--primary);
+    letter-spacing: 1px;
+    font-size: 17px;
+    transition: color 250ms ease;
+    font-weight: 700;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
+    .navbar-brand:hover {
+        color: var(--blue);
+    }
+
+.topnav-link {
+    color: #b7b9cc;
+    transition: color 250ms ease;
 }
 
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    .topnav-link:hover {
+        color: #858796;
+    }
+
+.topnav-user-link {
+    color: var(--secondary);
+    transition: color 250ms ease;
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  line-height: 60px; /* Vertically center the text there */
+
+    .topnav-user-link:hover {
+        color: var(--indigo);
+    }
+
+.topbar-divider {
+    width: 0;
+    border-right: 1px solid #e3e6f0;
+    height: calc(4.375rem - 2rem);
+    margin: auto 1rem
+}
+
+/* =================================
+      Top Navigation Dropdown
+================================= */
+
+.dropdown-menu {
+    margin-top: 20px;
+    border: none;
+    border-radius: 7px;
+    box-shadow: rgba(58, 59, 69, 0.15) 0px 2.4px 28px 0px;
+}
+
+.dropdown-item {
+    padding-left: 15px;
+}
+
+.dropdown-menu a {
+    font-size: 13.6px;
+    font-weight: 300;
+}
+
+    .dropdown-menu a i {
+        color: #d1d3e2;
+    }
+
+.dropdown-divider {
+    height: 0;
+    margin: .5rem 0;
+    overflow: hidden;
+    border-top: 1px solid #eaecf4;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.dropdown-menu.topnav-dropdown.show {
+    left: -140px;
+}
+
+.user-dropdown {
+    left: -40px;
+    width: 100px;
+}
+
+/* =================================
+        Side Navigation
+================================= */
+
+aside {
+    position: fixed;
+    top: 7vh;
+    bottom: 0;
+    left: 0;
+    width: 15rem;
+    padding: 5px;
+    background: #fff;
+    border-right: 1px solid var(--light);
+    z-index: 9999;
+}
+
+.sidebar-menu {
+    list-style: none;
+    margin: 0;
+    padding: 15px;
+}
+
+.sidebar-item {
+    margin: 5px 0;
+    padding: 10px 15px;
+    transition: background 250ms ease;
+    border-radius: 5px;
+}
+
+    .sidebar-item:hover {
+        background: var(--light);
+    }
+
+
+.sidebar-link {
+    color: var(--dark);
+    font-size: 15px;
+    text-decoration: none !important;
+    display: block;
+    font-weight: 300;
+}
+
+    .sidebar-link i {
+        color: var(--primary);
+        margin-right: 5px;
+    }
+
+/* =================================
+        Active Page Class
+================================= */
+.active {
+    background: var(--light);
+}
+
+    .active a {
+        color: var(--primary);
+        font-weight: 500;
+    }
+
+/* =================================
+      Page Content Wrapper
+================================= */
+
+#wrapper {
+    position: relative;
+    z-index: 1 !important;
+}
+
+#content-wrapper {
+    margin-top: 7vh;
+    min-height: 93vh;
+    margin-left: 15rem;
+    padding: 15px 10px;
+    overflow: hidden;
+    z-index: 1 !important;
 }
