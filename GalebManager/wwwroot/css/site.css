@@ -1,26 +1,21 @@
 ﻿:root {
     --blue: #4e73df;
-    --indigo: #6610f2;
-    --purple: #6f42c1;
-    --pink: #e83e8c;
-    --red: #e74a3b;
-    --orange: #fd7e14;
-    --yellow: #f6c23e;
-    --green: #1cc88a;
-    --teal: #20c9a6;
-    --cyan: #36b9cc;
-    --white: #fff;
-    --gray: #858796;
-    --gray-dark: #5a5c69;
     --primary: #4285F4;
-    --secondary: #858796;
-    --success: #1cc88a;
-    --info: #36b9cc;
-    --warning: #f6c23e;
-    --danger: #e74a3b;
+    --dark-primary: #346AC3;
     --light: #f8f9fc;
     --dark: #5a5c69;
     --black: #111113;
+    --gray: #858796;
+    --gray-dark: #5a5c69;
+    --teal: #20c9a6;
+    --green: #1cc88a;
+    --white: #fff;
+    --info: #36b9cc;
+    --success: #1cc88a;
+    --danger: #e74a3b;
+    --warning: #f6c23e;
+    --secondary: #858796;
+    --dark-danger: #B83B2F;
 }
 
 body, html {
@@ -28,7 +23,6 @@ body, html {
     padding: 0;
     position: relative;
     background: var(--light);
-    font-family: "Poppins", sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -54,7 +48,6 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-brand {
     text-transform: uppercase;
     color: var(--primary);
-    letter-spacing: 1px;
     font-size: 17px;
     transition: color 250ms ease;
     font-weight: 700;
@@ -94,7 +87,7 @@ h1, h2, h3, h4, h5, h6 {
 ================================= */
 
 .dropdown-menu {
-    margin-top: 20px;
+    margin-top: 10px;
     border: none;
     border-radius: 7px;
     box-shadow: rgba(58, 59, 69, 0.15) 0px 2.4px 28px 0px;
@@ -106,7 +99,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .dropdown-menu a {
     font-size: 13.6px;
-    font-weight: 300;
+    font-weight: 400 !important;
 }
 
     .dropdown-menu a i {
@@ -208,4 +201,62 @@ aside {
     padding: 15px 10px;
     overflow: hidden;
     z-index: 1 !important;
+}
+
+/* =================================
+            Modal
+================================= */
+.modal-title {
+    color: var(--gray);
+}
+.modal-content {
+    border: 1px solid transparent;
+    border-radius: 0 !important;
+}
+
+.modal-title {
+    color: var(--gray-dark) !important;
+}
+
+.modal-body {
+    color: var(--dark);
+}
+
+
+.modal-footer {
+    border: none;
+}
+
+.modal-header {
+    padding: 10px 15px 5px 15px;
+}
+
+/* =================================
+            Buttons
+================================= */
+.btn-general {
+    border-radius: 2px;
+    padding: 6px 22px
+}
+
+.btn--danger {
+    background: var(--danger);
+    color: #fff;
+}
+
+.btn--danger:hover {
+    background: var(--dark-danger);
+}
+
+.btn--primary {
+    background: var(--primary);
+    color: #fff;
+}
+
+    .btn--primary:hover {
+        background: var(--dark-primary);
+    }
+
+.shadow-md {
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06) !important;
 }

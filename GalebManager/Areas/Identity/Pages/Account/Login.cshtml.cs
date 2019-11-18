@@ -36,7 +36,7 @@ namespace GalebManager.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Username je obavezno polje!")]
             [DataType(DataType.Text)]
             [Display(Name = "User Name")]
             public string UserName { get; set; }
@@ -44,7 +44,7 @@ namespace GalebManager.Areas.Identity.Pages.Account
             [EmailAddress]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Username je obavezno polje!")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 

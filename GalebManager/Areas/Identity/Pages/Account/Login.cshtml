@@ -33,83 +33,52 @@
       integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
 
 <script src="~/js/template/jquery.slim.js"></script>
-
-<style type="text/css">
-
-    .login,
-    .image {
-        min-height: 100vh;
-    }
-
-    .bg-image {
-        background-image: url('https://source.unsplash.com/WEQbe2jBg40/600x1200');
-        background-size: cover;
-        background-position: center;
-    }
-
-    .login-heading {
-        font-weight: 300;
-    }
-
-    .btn-login {
-        font-size: 0.9rem;
-        letter-spacing: 0.05rem;
-        padding: 0.75rem 1rem;
-    }
-
-    #validationMessages ul {
-        list-style-type: none;
-        padding: 0 !important;
-    }
-
-    .card{
-        border-color: #dc3545;
-    }
-
-  
-</style>
-
-
+<link href="~/css/login.css" rel="stylesheet" />
 
 <div class="container-fluid">
-    <div class="row no-gutter">
-        <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
-        <div class="col-md-8 col-lg-6">
-            <div class="login d-flex align-items-center py-5">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-9 col-lg-8 mx-auto">
-                            <h3 class="login-heading mb-4">Dobrodošli, prijavite se!</h3>
+    <div class="row">
+        <div class="col-lg-7 col-md-6 d-md-block d-none p-0" >
+            <img src="~/images/login-img-3.jpg" id="bg-image" class="img-fluid" alt="Alternate Text" />
+        </div>
+        <div class="col-lg-5 col-md-6 col-sm-9 mx-sm-auto login">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h1 class="login-logo">Galeb Manager</h1>
+                        <h3 class="login-heading mb-0">Dobrodošli, prijavite se!</h3>
 
-                            @if (Model.ModelState.IsValid == false)
-                            {
-                                <div class="card">
-                                    <div class="card-body pl-2 pb-1 m-0">
-                                        <div id="validationMessages" asp-validation-summary="All"></div>
-                                    </div>
+                        @if (Model.ModelState.IsValid == false)
+                        {
+                            @*<div class="card">
+                                <div class="card-body pl-2 pb-1 m-0">
+                                    <div id="validationMessages" asp-validation-summary="All"></div>
                                 </div>
-                            }
-                        <br />
-                            <form id="account" method="post">
-                                <div class="form-label-group mb-2">
-                                    <input asp-for="Input.UserName" id="input-username" class="form-control" placeholder="korisničko ime" />
-                                </div>
-                                <div class="form-label-group">
-                                    <input asp-for="Input.Password" id="input-password" class="form-control" placeholder="lozinka" />
-                                </div>
-                                <div class="checkbox mb-2 mt-2">
-                                    <label asp-for="Input.RememberMe">
-                                        <input asp-for="Input.RememberMe" />
-                                        @Html.DisplayNameFor(m => m.Input.RememberMe)
-                                    </label>
+                            </div>*@
 
-                                </div>
-                                <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Prijava</button>
-                                <div class="text-center">
-                                    <a id="forgot-password" class="small" asp-page="./ForgotPassword">Zaboravili ste lozinku ?</a>
-                                </div>
-                            </form>
-                        </div>
+                            <div class="invalid-login">
+                                <p>Molimo unesite vazece podatke!</p>
+                            </div>
+                        }
+                    <br />
+                        <form id="account" method="post">
+                            <div class="form-label-group mb-2">
+                                <input asp-for="Input.UserName" id="input-username" class="form-control" placeholder="korisničko ime" />
+                            </div>
+                            <div class="form-label-group">
+                                <input asp-for="Input.Password" id="input-password" class="form-control" placeholder="lozinka" />
+                            </div>
+                            <div class="checkbox mb-2 mt-2">
+                                <label asp-for="Input.RememberMe">
+                                    <input asp-for="Input.RememberMe" />
+                                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                </label>
+
+                            </div>
+                            <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Prijava</button>
+                            <div class="text-center">
+                                <a id="forgot-password" class="small" asp-page="./ForgotPassword">Zaboravili ste lozinku ?</a>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -117,6 +86,21 @@
     </div>
 </div>
 
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    
 }
+
+<script>
+    const images = ["/images/login-img-2.jpg", "/images/login-img-3.jpg", "/images/login-img-4.jpg", "/images/login-img-5.jpg", "/images/login-img-6.jpg"];
+
+    $(function () {
+        const random = Math.floor(Math.random() * 6 + 1);
+        let bgImage = $('#bg-image');
+
+        console.log(random);
+        bgImage.attr('src', images[random]);
+    });
+</script>
