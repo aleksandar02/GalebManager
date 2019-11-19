@@ -164,19 +164,68 @@ aside {
     padding: 10px 15px;
     transition: background 250ms ease;
     border-radius: 0.625rem;
+    position: relative;
 }
 
     .sidebar-item:hover {
         background: var(--light);
     }
 
+        .sidebar-item:hover .sidebar-item .caret {
+            z-index: 9999999 !important;
+        }
+
+    .sidebar-item .caret {
+        position: absolute;
+        top: 14px;
+        right: 20px;
+        color: var(--secondary);
+        z-index: 1;
+    }
+
+    .sidebar-dropdown {
+        padding-left: 20px;
+        padding-top: 5px;
+    }
+
+    .sidebar-dropdown-item {
+        margin: 2px 0;
+        padding: 4px 10px;
+        border-radius: 2px;
+        transition: all 250ms ease;
+    }
+
+    .sidebar-dropdown-item:hover {
+        background: var(--white);
+        color: var(--dark);
+    }
+
+.sidebar-dropdown-link {
+    color: var(--dark);
+    display: block;
+    font-size: 14px;
+}
+
+.fakture-icon {
+    color: var(--dark-primary) !important;
+    margin-right: 3px;
+}
+
+.racuni-icon {
+    color: var(--green) !important;
+    margin-right: 3px;
+}
+
+.pazari-icon {
+    color: var(--danger) !important;
+    margin-right: 3px;
+}
 
 .sidebar-link {
     color: var(--dark);
     font-size: 15px;
     text-decoration: none !important;
     display: block;
-    font-weight: 300;
 }
 
     .sidebar-link i {
