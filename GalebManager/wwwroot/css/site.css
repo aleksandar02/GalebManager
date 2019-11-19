@@ -1,8 +1,8 @@
 ﻿:root {
     --blue: #4e73df;
-    --primary: #4285F4;
-    --dark-primary: #346AC3;
-    --light: #f8f9fc;
+    --primary: #22b9ff;
+    --dark-primary: #4285F4;
+    --light: #f1f2f7;
     --dark: #5a5c69;
     --black: #111113;
     --gray: #858796;
@@ -12,10 +12,13 @@
     --white: #fff;
     --info: #36b9cc;
     --success: #1cc88a;
-    --danger: #e74a3b;
-    --warning: #f6c23e;
+    --danger: #E54F4F;
+    --warning: #fbce44;
     --secondary: #858796;
     --dark-danger: #B83B2F;
+    --cyan: #36b9cc;
+    --pink: #E91E63;
+    --orange: #fd7e14;
 }
 
 body, html {
@@ -28,6 +31,14 @@ body, html {
 h1, h2, h3, h4, h5, h6 {
     font-weight: 400;
     color: var(--dark);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
 }
 
 /* =================================
@@ -47,7 +58,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar-brand {
     text-transform: uppercase;
-    color: var(--primary);
+    color: var(--dark-primary);
     font-size: 17px;
     transition: color 250ms ease;
     font-weight: 700;
@@ -89,7 +100,7 @@ h1, h2, h3, h4, h5, h6 {
 .dropdown-menu {
     margin-top: 10px;
     border: none;
-    border-radius: 7px;
+    border-radius: 0.625rem;
     box-shadow: rgba(58, 59, 69, 0.15) 0px 2.4px 28px 0px;
 }
 
@@ -152,7 +163,7 @@ aside {
     margin: 5px 0;
     padding: 10px 15px;
     transition: background 250ms ease;
-    border-radius: 5px;
+    border-radius: 0.625rem;
 }
 
     .sidebar-item:hover {
@@ -195,7 +206,7 @@ aside {
 }
 
 #content-wrapper {
-    margin-top: 7vh;
+    margin-top: 8vh;
     min-height: 93vh;
     margin-left: 15rem;
     padding: 15px 10px;
@@ -211,7 +222,7 @@ aside {
 }
 .modal-content {
     border: 1px solid transparent;
-    border-radius: 0 !important;
+    border-radius: 0.625rem;
 }
 
 .modal-title {
@@ -259,4 +270,51 @@ aside {
 
 .shadow-md {
     box-shadow: 0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06) !important;
+}
+
+.shadow-lg {
+    box-shadow: rgba(58, 59, 69, 0.15) 0px 2.4px 28px 0px !important;
+}
+
+/* =================================
+         Panels
+================================= */
+._panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 0;
+    background: var(--white);
+    color: #fff !important;
+    padding: 30px;
+    border-radius: 0.625rem;
+    transition: all 150ms ease;
+}
+
+._panel:hover {
+    background: #fafafa;
+}
+
+._panel-inner {
+    text-align: center;
+}
+
+._panel h3 {
+    color: var(--dark);
+    font-size: 24px;
+}
+
+._panel i {
+    color: var(--primary);
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.pazari i {
+    color: var(--green);
+}
+
+.statistika i {
+    color: var(--danger);
 }
