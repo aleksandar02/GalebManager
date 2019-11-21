@@ -5,10 +5,11 @@
     --light: #f1f2f7;
     --dark: #5a5c69;
     --black: #111113;
-    --gray: #858796;
-    --gray-dark: #5a5c69;
+    --gray: #CCCEDB;
+    --gray-dark: #b7b9cc;
     --teal: #20c9a6;
     --green: #1cc88a;
+    --dark-green: #16A06E;
     --white: #fff;
     --info: #36b9cc;
     --success: #1cc88a;
@@ -69,21 +70,21 @@ ul {
     }
 
 .topnav-link {
-    color: #b7b9cc;
+    color: var(--gray);
     transition: color 250ms ease;
 }
 
     .topnav-link:hover {
-        color: #858796;
+        color: var(--gray-dark);
     }
 
 .topnav-user-link {
-    color: var(--secondary);
+    color: var(--danger);
     transition: color 250ms ease;
 }
 
     .topnav-user-link:hover {
-        color: var(--indigo);
+        color: var(--dark-danger);
     }
 
 .topbar-divider {
@@ -189,7 +190,6 @@ aside {
     }
 
     .sidebar-dropdown-item {
-        margin: 2px 0;
         padding: 4px 10px;
         border-radius: 2px;
         transition: all 250ms ease;
@@ -207,17 +207,17 @@ aside {
 }
 
 .fakture-icon {
-    color: var(--dark-primary) !important;
+    color: var(--gray) !important;
     margin-right: 3px;
 }
 
 .racuni-icon {
-    color: var(--green) !important;
+    color: var(--primary) !important;
     margin-right: 3px;
 }
 
 .pazari-icon {
-    color: var(--danger) !important;
+    color: var(--green) !important;
     margin-right: 3px;
 }
 
@@ -275,7 +275,7 @@ aside {
 }
 
 .modal-title {
-    color: var(--gray-dark) !important;
+    color: var(--dark) !important;
 }
 
 .modal-body {
@@ -307,6 +307,16 @@ aside {
 .btn--danger:hover {
     background: var(--dark-danger);
 }
+
+.btn--green {
+    background: var(--light);
+    color: var(--dark);
+}
+
+    .btn--green:hover {
+        background: var(--green);
+        color: var(--white);
+    }
 
 .btn--primary {
     background: var(--primary);
@@ -360,10 +370,144 @@ aside {
     margin-bottom: 10px;
 }
 
+.fakture i {
+    color: var(--gray);
+}
+
 .pazari i {
     color: var(--green);
 }
 
+
 .statistika i {
     color: var(--danger);
 }
+
+/* =================================
+         Card
+================================= */
+
+._card {
+    border: 1px solid transparent;
+    border-radius: 0;
+    background: var(--white);
+    color: var(--dark) !important;
+    padding: 30px;
+    border-radius: 0.625rem;
+    transition: all 150ms ease;
+}
+
+._card-title {
+    font-size: 32px;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    display: block;
+    border-bottom: 1px solid var(--light);
+}
+
+.form-control {
+    border-radius: 2px;
+    box-shadow: none !important;
+    color: var(--dark);
+    font-weight: 400;
+}
+
+.form-control:focus {
+    border-color: var(--primary) !important;
+}
+
+.btn {
+    box-shadow: none !important;
+}
+
+#billTable table {
+    color: var(--dark);
+    border: none;
+    border-radius: 0.625rem;
+}
+
+    #billTable tbody tr {
+        transition: background 350ms ease;
+    }
+
+        #billTable tbody tr:hover {
+            background: var(--light) !important;
+        }
+
+    #billTable table td {
+        border-color: var(--light);
+        padding: 15px 5px;
+    }
+
+.billTableTr {
+    background: var(--primary);
+    color: var(--white);
+    font-size: 14px;
+}
+
+    .billTableTr th {
+        font-weight: 500 !important;
+
+    }
+
+    .billTableTr th {
+        border: none !important;
+    }
+
+.table-link {
+    color: #e0e0e0 !important;
+    display: block;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    text-decoration: none !important;
+    transition: all 350ms ease;
+}
+
+    .table-link:nth-child(1):hover,
+    .table-link:nth-child(2):hover {
+        color: #515156 !important;
+    }
+
+button.table-link:hover {
+    color: #dc2751 !important;
+}
+
+.pagination {
+    margin: 30px 0 !important;
+}
+
+#billTable_previous {
+    border-color: var(--light) !important;
+    background: var(--white) !important;
+}
+
+    .pagination .page-item a {
+        background: var(--white) !important;
+        color: var(--dark);
+        border-color: var(--light);
+        box-shadow: none;
+        transition: background 350ms ease;
+    }
+
+        .pagination .page-item a:hover {
+            background: var(--light) !important;
+        }
+
+    .pagination .page-item.active a {
+        background: var(--primary) !important;
+        color: var(--white);
+        border-color: var(--primary);
+    }
+
+.createNewLink {
+    color: #e0e0e0;
+    text-decoration: none !important;
+    border-bottom: 1px dotted #e0e0e0;
+    transition: all 350ms ease;
+}
+
+    .createNewLink:hover {
+        color: #B01F40;
+        border-color: #B01F40;
+    }

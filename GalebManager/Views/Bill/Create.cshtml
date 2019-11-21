@@ -1,0 +1,75 @@
+﻿@model GalebManager.Models.BillViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<div class="_card" id="createBillPage">
+
+
+    <h1 class="mb-4 _card-title">Evidentiraj racun</h1>
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="StoreId" class="control-label"></label>
+                    <select asp-for="StoreId" class="form-control" id="createStoreId">
+                        <option value="" disabled selected>Izaberi</option>
+                    </select>
+                    <span asp-validation-for="StoreId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Number" class="control-label"></label>
+                    <input asp-for="Number" class="form-control" />
+                    <span asp-validation-for="Number" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Date" class="control-label"></label>
+                    <input type="date" asp-for="Date" class="form-control" />
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+                <input type="hidden" asp-for="UserCreated" value="@User.Identity.Name" class="form-control" />
+
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-general btn--primary shadow-md mt-3" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="SupplierId" class="control-label"></label>
+                    <select asp-for="SupplierId" class="form-control" id="createSupplierId">
+                        <option value="" disabled selected>Izaberi</option>
+                    </select>
+                    <span asp-validation-for="SupplierId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="FactureNumber" class="control-label"></label>
+                    <input asp-for="FactureNumber" class="form-control" />
+                    <span asp-validation-for="FactureNumber" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Sum" class="control-label"></label>
+                    <input asp-for="Sum" class="form-control" />
+                    <span asp-validation-for="Sum" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/createBill.js"></script>
+    <script src="~/js/datatables.min.js"></script>
+    <script src="~/js/responsive.bootstrap4.min.js"></script>
+
+    <link href="~/css/datatables.min.css" rel="stylesheet" />
+    <link href="~/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+}

@@ -47,6 +47,7 @@
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                         </li>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link topnav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -62,7 +63,6 @@
 
                         <div class="topbar-divider"></div>
 
-
                         <li class="nav-item dropdown">
                             <a class="nav-link topnav-user-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -77,18 +77,22 @@
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2"></i>
                                     Podesavanja
                                 </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-plus fa-sm fa-fw mr-2"></i>
+                                    Dodaj fakturu
+                                </a>
+                                <a class="dropdown-item" href="/Bill/Create">
+                                    <i class="fas fa-plus fa-sm fa-fw mr-2"></i>
+                                    Dodaj racun
+                                </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Odjavi se
+                                    Odjava
                                 </a>
                             </div>
                         </li>
-
-
-
                     </ul>
-
                 </div>
             }
         </div>
@@ -97,7 +101,7 @@
     <aside>
         <ul class="sidebar-menu">
             <li class="sidebar-item active">
-                <a href="#" class="sidebar-link">
+                <a href="/" class="sidebar-link">
                     <i class="fas fa-fw fa-home"></i>
                     Početna strana
                 </a>
@@ -116,7 +120,7 @@
                         </a>
                     </li>
                     <li class="sidebar-dropdown-item">
-                        <a href="#" class="sidebar-dropdown-link">
+                        <a href="/Bill/Index" class="sidebar-dropdown-link">
                             <i class="fas fa-fw fa-folder racuni-icon"></i>
                             Racuni
                         </a>
