@@ -79,12 +79,12 @@ ul {
     }
 
 .topnav-user-link {
-    color: var(--danger);
+    color: var(--dark-primary);
     transition: color 250ms ease;
 }
 
     .topnav-user-link:hover {
-        color: var(--dark-danger);
+        color: var(--dark-primary);
     }
 
 .topbar-divider {
@@ -420,24 +420,28 @@ aside {
     box-shadow: none !important;
 }
 
+/* =================================
+         Table
+================================= */
+
 #billTable table {
     color: var(--dark);
     border: none;
     border-radius: 0.625rem;
 }
 
-    #billTable tbody tr {
-        transition: background 350ms ease;
-    }
+#billTable tbody tr {
+    transition: background 350ms ease;
+}
 
-        #billTable tbody tr:hover {
-            background: var(--light) !important;
+        #billTable tbody tr:nth-child(even) {
+            background: #f8f6ff;
         }
 
-    #billTable table td {
-        border-color: var(--light);
-        padding: 15px 5px;
-    }
+#billTable table td {
+    border-color: var(--light);
+    padding: 15px 5px;
+}
 
 .billTableTr {
     background: var(--primary);
@@ -445,14 +449,20 @@ aside {
     font-size: 14px;
 }
 
-    .billTableTr th {
-        font-weight: 500 !important;
+.table th, .table td {
+    border: none !important;
+}
 
-    }
+.billTableTr th {
+    font-weight: 500 !important;
+}
 
-    .billTableTr th {
-        border: none !important;
+    .billTableTr th:first-child {
+        border-top-left-radius: 2px;
     }
+        .billTableTr th:last-child {
+            border-top-right-radius: 2px;
+        }
 
 .table-link {
     color: #e0e0e0 !important;
@@ -499,15 +509,24 @@ button.table-link:hover {
         color: var(--white);
         border-color: var(--primary);
     }
+    .action-link {
+        padding-right: 3px;
+        transition: color 250ms ease;
+        font-size: 14px;
+    }
 
-.createNewLink {
-    color: #e0e0e0;
-    text-decoration: none !important;
-    border-bottom: 1px dotted #e0e0e0;
-    transition: all 350ms ease;
+.edit-link {
+    color: var(--green);
 }
 
-    .createNewLink:hover {
-        color: #B01F40;
-        border-color: #B01F40;
+.edit-link:hover {
+    color: var(--dark-green);
+}
+
+.details-link {
+    color: var(--primary);
+}
+
+    .details-link:hover {
+        color: var(--dark-primary);
     }

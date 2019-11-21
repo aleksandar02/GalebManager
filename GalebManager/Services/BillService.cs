@@ -35,7 +35,12 @@ namespace GalebManager.Services
         {
             return await _billDal.GetBill(id);
         }
-       
+
+        public async Task<BillDto> GetBillByFactureNumber(string factureNumber)
+        {
+            return await _billDal.GetBillByFactureNumber(factureNumber);
+        }
+
         public bool UpdateBill(int id, BillDto bill)
         {
             return _billDal.UpdateBill(id, bill);

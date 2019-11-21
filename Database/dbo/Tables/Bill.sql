@@ -11,5 +11,5 @@
     [UserCreated] NVARCHAR(255) NOT NULL, 
 
     CONSTRAINT [FK_Bill_Suppliers] FOREIGN KEY ([SupplierId]) REFERENCES [Supplier]([Id]), 
-    CONSTRAINT [FK_Bill_Store] FOREIGN KEY ([StoreId]) REFERENCES [Store]([Id]), 
+    CONSTRAINT [FK_Bill_Store] FOREIGN KEY ([StoreId]) REFERENCES [Store]([Id])
 )

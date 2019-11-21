@@ -17,5 +17,6 @@ AS
 		FROM Bill
 		INNER JOIN [Store] ON Store.Id = Bill.StoreId
 		INNER JOIN [Supplier] ON Supplier.Id = Bill.SupplierId
+		ORDER BY Bill.DateCreated DESC
 	END
 	

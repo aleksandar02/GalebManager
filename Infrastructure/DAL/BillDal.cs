@@ -51,6 +51,11 @@ namespace Infrastructure.DAL
             return result;
         }
 
+        public Task<BillDto> GetBillByFactureNumber(string factureNumber)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<BillDto>> GetAllBills()
         {
             var bills = new List<BillDto>();
