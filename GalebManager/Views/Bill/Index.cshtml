@@ -4,140 +4,180 @@
     ViewData["Title"] = "Index";
 }
 
-    <div class="_card">
-        <h1 class="_card-title">Evidencija racuna</h1>
+<div class="_card">
+    <h1 class="_card-title">Evidencija racuna</h1>
 
-        <div class="bill-actions">
-            <h3 class="mb-3">Pretraga</h3>
-            <form action="/Bill/Search" id="searchForm">
-                <div class="form-group">
-                    <select id="stores" class="form-control">
-                        <option selected value="-1">Sve</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <select id="supplier" class="form-control">
-                        <option selected value="-1">Sve</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <select id="factured" class="form-control">
-                        <option selected value="-1">Sve</option>
-                        <option value="1">Fakturisane</option>
-                        <option value="2">Nefakturisane</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="dateFrom" />
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="dateTo" />
-                </div>
+    <div class="bill-actions">
+        <h3 class="mb-3">Pretraga</h3>
+        <form action="/Bill/Search" id="searchForm">
+            <div class="form-group">
+                <select id="stores" class="form-control">
+                    <option selected value="-1">Sve</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select id="supplier" class="form-control">
+                    <option selected value="-1">Sve</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select id="factured" class="form-control">
+                    <option selected value="-1">Sve</option>
+                    <option value="1">Fakturisane</option>
+                    <option value="2">Nefakturisane</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="dateFrom" />
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="dateTo" />
+            </div>
 
-                <button type="submit" class="btn btn-general btn--primary shadow-md">Pretrazi</button>
-                <a href="/Bill/Create" class="btn btn-general btn--light-green shadow-md">Novi racun</a>
-            </form>
-        </div>
+            <button type="submit" class="btn btn-general btn--primary shadow-md">Pretrazi</button>
+            <a href="/Bill/Create" class="btn btn-general btn--light-green shadow-md">Novi racun</a>
+        </form>
+    </div>
 
-        <table class="table" id="billTable">
-            <thead class="billTableTr">
+    <table class="table" id="billTable">
+        <thead class="billTableTr">
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.StoreId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Number)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FactureNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SupplierId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Sum)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="billTableData">
+            @foreach (var item in Model)
+            {
+                var formattedDate = item.Date.ToString("MM/dd/yyyy");
                 <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StoreName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Number)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FactureNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SupplierName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => formattedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sum)
+                    </td>
 
-                    <th>
-                        @Html.DisplayNameFor(model => model.StoreId)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Number)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.FactureNumber)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.SupplierId)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Date)
-                    </th>
-
-                    <th>
-                        @Html.DisplayNameFor(model => model.Sum)
-                    </th>
-
-                    <th></th>
+                    <td>
+                        <a href="#" class="action-link edit-link" data-toggle="modal" data-target="#editBillModal"><i class="fas fa-pen fa-fw"></i>&nbsp;Izmena</a>
+                        <a href="#" class="action-link details-link"><i class="fas fa-info fa-fw"></i>&nbsp;Detalji</a>
+                    </td>
                 </tr>
-            </thead>
-            <tbody id="billTableData">
-                @foreach (var item in Model)
-                {
-                    var formattedDate = item.Date.ToString("MM/dd/yyyy");
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.StoreName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Number)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FactureNumber)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SupplierName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => formattedDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Sum)
-                        </td>
+            }
+        </tbody>
+    </table>
 
-                        <td>
-                            <a href="#" class="action-link edit-link" data-toggle="modal" data-target="#editBillModal"><i class="fas fa-pen fa-fw"></i>&nbsp;Izmena</a>
-                            <a href="#" class="action-link details-link"><i class="fas fa-info fa-fw"></i>&nbsp;Detalji</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+    <div class="modal mt-5" id="editBillModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
 
-        <div class="modal mt-5" id="editBillModal">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Izmena racuna</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
 
-                    <div class="modal-header">
-                        <h4 class="modal-title">Izmena racuna</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Racun</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Faktura</a>
+                        </li>
 
-                    <div class="modal-body">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Racun</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Faktura</a>
-                            </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
-                        </ul>
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <form asp-action="Create">
+                                <div class="row">
 
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="StoreId" class="control-label">Prodavnica</label>
+                                            <select name="StoreId" class="form-control" id="stores" required>
+                                                <option value="" disabled selected>Izaberi</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Number" class="control-label">Broj racuna</label>
+                                            <input name="Number" class="form-control" required />
+                                        </div>
 
-                            </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                        <div class="form-group">
+                                            <label for="Date" class="control-label">Datum</label>
+                                            <input type="date" name="Date" class="form-control" required />
+                                        </div>
 
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="SupplierId" class="control-label">Dobavljac</label>
+                                            <select name="SupplierId" class="form-control" id="supplier" required>
+                                                <option value="" disabled selected>Izaberi</option>
+                                            </select>
+                                        </div>
 
-                            </div>
+                                        <div class="form-group">
+                                            <label for="FactureNumber" class="control-label">Broj fakture</label>
+                                            <input name="FactureNumber" class="form-control" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="Sum" class="control-label">Iznos</label>
+                                            <input name="Sum" class="form-control" required />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                            <input type="submit" value="Izmena" class="btn btn-general btn--primary shadow-md mt-3" />
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         </div>
                     </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-general btn--danger" data-dismiss="modal">Close</button>
-                    </div>
-
                 </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-general btn--danger" data-dismiss="modal">Close</button>
+                </div>
+
             </div>
         </div>
     </div>
+</div>
 @section Scripts {
     <script src="~/js/datatables.min.js"></script>
     <script src="~/js/responsive.bootstrap4.min.js"></script>
