@@ -308,12 +308,12 @@ aside {
     background: var(--dark-danger);
 }
 
-.btn--green {
+.btn--light-green {
     background: var(--light);
     color: var(--dark);
 }
 
-    .btn--green:hover {
+    .btn--light-green:hover {
         background: var(--green);
         color: var(--white);
     }
@@ -530,3 +530,46 @@ button.table-link:hover {
     .details-link:hover {
         color: var(--dark-primary);
     }
+
+/* =================================
+             Bill Actions
+================================= */
+.bill-actions {
+    margin-bottom: 20px;
+}
+.bill-actions form {
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+}
+
+.bill-actions form input {
+    width: 100%;
+}
+
+.bill-actions form .form-group {
+    margin-bottom: 0px;
+}
+
+/* =================================
+             Tabs
+================================= */
+.nav-tabs {
+    border: none;
+    margin-bottom: 10px !important;
+}
+
+    .nav-tabs .nav-link {
+        border: none !important;
+        color: var(--dark);
+    }
+
+        .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+            border: none;
+            border-top: 2px solid var(--primary) !important;
+            border-radius: 0;
+        }
+
+        .tab-pane {
+            background: var(--white);
+        }

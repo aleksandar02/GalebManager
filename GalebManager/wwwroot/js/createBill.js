@@ -2,7 +2,7 @@
 
     function renderStores() {
         const storesData = JSON.parse(getStores());
-        const stores = $('#createStoreId');
+        const stores = $('#stores');
 
         $.each(storesData, (index, store) => {
             stores.append(`<option value='${store.Id}'>${store.Name}</option>`);
@@ -11,7 +11,7 @@
 
     function renderSuppliers() {
         const suppliersData = JSON.parse(getSuppliers());
-        const suppliers = $('#createSupplierId');
+        const suppliers = $('#supplier');
 
         $.each(suppliersData, (index, supplier) => {
             suppliers.append(`<option value='${supplier.Id}'>${supplier.Name}</option>`);

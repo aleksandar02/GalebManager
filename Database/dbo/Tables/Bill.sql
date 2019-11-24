@@ -13,3 +13,7 @@
     CONSTRAINT [FK_Bill_Suppliers] FOREIGN KEY ([SupplierId]) REFERENCES [Supplier]([Id]), 
     CONSTRAINT [FK_Bill_Store] FOREIGN KEY ([StoreId]) REFERENCES [Store]([Id])
 )
+
+GO
+
+CREATE INDEX [IX_Bill_Number] ON [dbo].[Bill] ([Number])

@@ -11,7 +11,6 @@ namespace GalebManager.Models
         public int Id { get; set; }
         public int StoreId { get; set; }
         public string StoreName { get; set; }
-        public int BillId { get; set; }
         public string BillNumber { get; set; }
         public string Number { get; set; }
         public decimal Sum { get; set; }
@@ -28,7 +27,6 @@ namespace GalebManager.Models
             invoice.Id = invoiceDto.Id;
             invoice.StoreId = invoiceDto.StoreId;
             invoice.StoreName = invoiceDto.StoreName;
-            invoice.BillId = invoiceDto.BillId;
             invoice.BillNumber = invoiceDto.BillNumber;
             invoice.Number = invoiceDto.Number;
             invoice.Sum = invoiceDto.Sum;
@@ -48,7 +46,6 @@ namespace GalebManager.Models
             invoiceDto.Id = invoiceViewModel.Id;
             invoiceDto.StoreId = invoiceViewModel.StoreId;
             invoiceDto.StoreName = invoiceViewModel.StoreName;
-            invoiceDto.BillId = invoiceViewModel.BillId;
             invoiceDto.BillNumber = invoiceViewModel.BillNumber;
             invoiceDto.Number = invoiceViewModel.Number;
             invoiceDto.Sum = invoiceViewModel.Sum;

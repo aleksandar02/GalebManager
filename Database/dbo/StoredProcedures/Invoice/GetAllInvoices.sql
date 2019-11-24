@@ -6,7 +6,6 @@ AS
 			Invoice.[StoreId],
 			Invoice.[Number],
 			Invoice.[BillNumber],
-			Invoice.[BillId],
 			Invoice.[SupplierId],
 			Invoice.[Date],
 			Invoice.[Sum],

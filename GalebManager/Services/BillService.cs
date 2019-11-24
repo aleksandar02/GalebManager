@@ -61,5 +61,10 @@ namespace GalebManager.Services
 
             return billViewModel;
         }
+
+        public async Task<IEnumerable<BillDto>> SearchBills(BillFilterDto filterDto)
+        {
+            return await _billDal.SearchBills(filterDto);
+        }
     }
 }

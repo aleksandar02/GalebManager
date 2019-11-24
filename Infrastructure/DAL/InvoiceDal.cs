@@ -33,7 +33,6 @@ namespace Infrastructure.DAL
                     command.Parameters.AddWithValue("@StoreId", invoice.StoreId);
                     command.Parameters.AddWithValue("@Number", invoice.Number);
                     command.Parameters.AddWithValue("@BillNumber", invoice.BillNumber);
-                    command.Parameters.AddWithValue("@BillId", invoice.BillId);
                     command.Parameters.AddWithValue("@SupplierId", invoice.SupplierId);
                     command.Parameters.AddWithValue("@Date", invoice.Date);
                     command.Parameters.AddWithValue("@Sum", invoice.Sum);
@@ -142,7 +141,6 @@ namespace Infrastructure.DAL
                     command.Parameters.AddWithValue("@StoreId", invoice.StoreId);
                     command.Parameters.AddWithValue("@Number", invoice.Number);
                     command.Parameters.AddWithValue("@BillNumber", invoice.BillNumber);
-                    command.Parameters.AddWithValue("@BillId", invoice.BillId);
                     command.Parameters.AddWithValue("@SupplierId", invoice.SupplierId);
                     command.Parameters.AddWithValue("@Date", invoice.Date);
                     command.Parameters.AddWithValue("@Sum", invoice.Sum);
@@ -170,7 +168,6 @@ namespace Infrastructure.DAL
             invoice.StoreName = reader["StoreName"].ToString();
             invoice.Number = reader["Number"].ToString();
             invoice.BillNumber = reader["BillNumber"].ToString();
-            invoice.BillId = Convert.ToInt32(reader["BillId"]);
             invoice.SupplierId = Convert.ToInt32(reader["SupplierId"]);
             invoice.SupplierName = reader["SupplierName"].ToString();
             invoice.Date = Convert.ToDateTime(reader["Date"]);

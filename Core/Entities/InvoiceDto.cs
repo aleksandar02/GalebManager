@@ -9,7 +9,6 @@ namespace Core.Entities
         public int Id { get; set; }
         public int StoreId { get; set; }
         public string StoreName { get; set; }
-        public int BillId { get; set; }
         public string BillNumber { get; set; }
         public string Number { get; set; }
         public decimal Sum { get; set; }

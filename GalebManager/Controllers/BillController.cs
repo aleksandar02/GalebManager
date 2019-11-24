@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Entities;
 using GalebManager.Models;
 using GalebManager.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 
 namespace GalebManager.Controllers
 {
@@ -19,9 +21,18 @@ namespace GalebManager.Controllers
         }
         public async Task<ActionResult> Index()
         {
-            var billDtos = await _billService.GetAllBIlls();
-            var billViewModels = billDtos.Select(BillViewModel.MapTo);
+            var filter = new BillFilterDto()
+            {
+                DateFrom = DateTime.Now.AddDays(-30),
+                DateTo = DateTime.Now.Date.AddHours(23).AddMinutes(59).AddSeconds(59),
+                StoreId = -1,
+                SupplierId = -1,
+                FactureStatus = -1
+            };
 
+            var billDtos = await _billService.SearchBills(filter);
+            var billViewModels = billDtos.Select(BillViewModel.MapTo);
+           
             return View(billViewModels);
         }
 
@@ -92,6 +103,17 @@ namespace GalebManager.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> SearchBills(string json)
+        {
+            var filter = JsonConvert.DeserializeObject<BillFilter>(json);
+            var filterDto = BillFilter.MapFrom(filter);
+
+            var bills = await _billService.SearchBills(filterDto);
+
+            return Json(bills);
         }
     }
 }

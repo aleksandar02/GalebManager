@@ -90,6 +90,46 @@ namespace Infrastructure.DAL
             return bills;
         }
 
+        public async Task<IEnumerable<BillDto>> SearchBills(BillFilterDto filterDto)
+        {
+            var bills = new List<BillDto>();
+
+            try
+            {
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
+
+                    string sqlProcedure = "SearchBills";
+                    var command = new SqlCommand(sqlProcedure, connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@StoreId", filterDto.StoreId);
+                    command.Parameters.AddWithValue("@SupplierId", filterDto.SupplierId);
+                    command.Parameters.AddWithValue("@DateFrom", filterDto.DateFrom);
+                    command.Parameters.AddWithValue("@DateTo", filterDto.DateTo);
+                    command.Parameters.AddWithValue("@FactureStatus", filterDto.FactureStatus);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (await reader.ReadAsync().ConfigureAwait(false))
+                        {
+                            var bill = new BillDto();
+                            bill = MapToBillDto(reader);
+
+                            bills.Add(bill);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+            }
+
+            return bills;
+        }
+
         public async Task<BillDto> GetBill(int id)
         {
             var bill = new BillDto();
