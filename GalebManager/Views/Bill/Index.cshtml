@@ -4,6 +4,8 @@
     ViewData["Title"] = "Index";
 }
 
+    
+
 <div class="_card">
     <h1 class="_card-title">Evidencija racuna</h1>
 
@@ -11,12 +13,12 @@
         <h3 class="mb-3">Pretraga</h3>
         <form action="/Bill/Search" id="searchForm">
             <div class="form-group">
-                <select id="stores" class="form-control">
+                <select id="stores" class="form-control stores">
                     <option selected value="-1">Sve</option>
                 </select>
             </div>
             <div class="form-group">
-                <select id="supplier" class="form-control">
+                <select id="supplier" class="form-control supplier">
                     <option selected value="-1">Sve</option>
                 </select>
             </div>
@@ -91,7 +93,7 @@
                     </td>
 
                     <td>
-                        <a href="#" class="action-link edit-link" data-toggle="modal" data-target="#editBillModal"><i class="fas fa-pen fa-fw"></i>&nbsp;Izmena</a>
+                        <a href="#" class="action-link edit-link" id="@item.Id" onclick="showUpdateBillModal(this);"><i class="fas fa-pen fa-fw"></i>&nbsp;Izmena</a>
                         <a href="#" class="action-link details-link"><i class="fas fa-info fa-fw"></i>&nbsp;Detalji</a>
                     </td>
                 </tr>
@@ -99,92 +101,28 @@
         </tbody>
     </table>
 
-    <div class="modal mt-5" id="editBillModal">
+    <div class="modal fade mt-5" id="editBillModal">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
 
-                <div class="modal-header">
-                    <h4 class="modal-title">Izmena racuna</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-
-                <div class="modal-body">
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Racun</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Faktura</a>
-                        </li>
-
-                    </ul>
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-
-                            <form asp-action="Create">
-                                <div class="row">
-
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="StoreId" class="control-label">Prodavnica</label>
-                                            <select name="StoreId" class="form-control" id="stores" required>
-                                                <option value="" disabled selected>Izaberi</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="Number" class="control-label">Broj racuna</label>
-                                            <input name="Number" class="form-control" required />
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="Date" class="control-label">Datum</label>
-                                            <input type="date" name="Date" class="form-control" required />
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="SupplierId" class="control-label">Dobavljac</label>
-                                            <select name="SupplierId" class="form-control" id="supplier" required>
-                                                <option value="" disabled selected>Izaberi</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="FactureNumber" class="control-label">Broj fakture</label>
-                                            <input name="FactureNumber" class="form-control" />
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="Sum" class="control-label">Iznos</label>
-                                            <input name="Sum" class="form-control" required />
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-
-                        </div>
-                            <input type="submit" value="Izmena" class="btn btn-general btn--primary shadow-md mt-3" />
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-general btn--danger" data-dismiss="modal">Close</button>
-                </div>
 
             </div>
         </div>
     </div>
 </div>
+
+
 @section Scripts {
     <script src="~/js/datatables.min.js"></script>
     <script src="~/js/responsive.bootstrap4.min.js"></script>
     <script src="~/js/bootstrap-datepicker.min.js"></script>
     <script src="~/js/moment.js"></script>
-    <script src="~/js/createBill.js"></script>
-    <script src="~/js/bill.js"></script>
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+
+    <script src="~/js/bill/createBill.js"></script>
+    <script src="~/js/bill/bill.js"></script>
+    <script src="~/js/bill/validateBill.js"></script>
 
     <link href="~/css/bootstrap-datepicker.min.css" rel="stylesheet" />
     <link href="~/css/datatables.min.css" rel="stylesheet" />

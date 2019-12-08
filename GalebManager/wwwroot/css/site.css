@@ -48,7 +48,7 @@ ul {
 
 .navbar {
     box-shadow: rgba(58, 59, 69, 0.15) 0px 2.4px 28px 0px;
-    height: 7vh;
+    height: 8vh;
     position: fixed;
     top: 0;
     left: 0;
@@ -144,7 +144,7 @@ ul {
 
 aside {
     position: fixed;
-    top: 7vh;
+    top: 8vh;
     bottom: 0;
     left: 0;
     width: 15rem;
@@ -255,23 +255,26 @@ aside {
 }
 
 #content-wrapper {
-    margin-top: 8vh;
+    margin-top: 9vh;
     min-height: 93vh;
     margin-left: 15rem;
     padding: 15px 10px;
     overflow: hidden;
-    z-index: 1 !important;
+    position: relative;
 }
 
 /* =================================
             Modal
 ================================= */
+.modal {
+    z-index: 9999999999!important
+}
 .modal-title {
     color: var(--gray);
 }
 .modal-content {
     border: 1px solid transparent;
-    border-radius: 0.625rem;
+    border-radius: 2px;
 }
 
 .modal-title {
@@ -556,12 +559,13 @@ button.table-link:hover {
 ================================= */
 .nav-tabs {
     border: none;
-    margin-bottom: 10px !important;
+    margin-bottom: 25px !important;
 }
 
     .nav-tabs .nav-link {
         border: none !important;
         color: var(--dark);
+        font-size: 1rem;
     }
 
         .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
@@ -573,3 +577,39 @@ button.table-link:hover {
         .tab-pane {
             background: var(--white);
         }
+
+/* =================================
+            Alerts
+================================= */
+
+._alert {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    padding: 10px 15px;
+    border-radius: 2px;
+    opacity: 0.8;
+}
+    ._alert i {
+        margin: 0;
+        margin-right: 10px;
+        padding: 0;
+        font-size: 1.2rem !important;
+    }
+
+._alert p {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+}
+
+    ._alert.alert--success {
+        border: 1px solid var(--green);
+        background: var(--green);
+        color: var(--white);
+    }
+    ._alert.alert--danger {
+        border: 1px solid var(--danger);
+        background: var(--danger);
+        color: var(--white);
+    }

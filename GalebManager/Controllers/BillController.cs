@@ -36,12 +36,13 @@ namespace GalebManager.Controllers
             return View(billViewModels);
         }
 
-        public async Task<ActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
             var billDto = await _billService.GetBill(id);
             var billViewModel = BillViewModel.MapTo(billDto);
+            var billJSON = JsonConvert.SerializeObject(billViewModel);
 
-            return View(billViewModel);
+            return Json(billJSON);
         }
 
         public ActionResult Create()
@@ -82,26 +83,28 @@ namespace GalebManager.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public bool UpdateFacturedBill(string json)
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return View();
-                }
+                //if (!ModelState.IsValid)
+                //{
+                //    return false;
+                //}
 
-                var billViewModel = _billService.CreateBillRequestModel(collection);
+                var billViewModel = JsonConvert.DeserializeObject<BillViewModel>(json);
+                billViewModel.DateCreated = DateTime.Now;
+                billViewModel.UserCreated = User.Identity.Name;
+
                 var billDto = BillViewModel.MapFrom(billViewModel);
 
-                bool result = _billService.UpdateBill(id, billDto);
+                bool result = _billService.UpdateBill(billDto.Id, billDto);
 
-                return RedirectToAction(nameof(Index));
+                return result;
             }
             catch
             {
-                return View();
+                return false;
             }
         }
 
