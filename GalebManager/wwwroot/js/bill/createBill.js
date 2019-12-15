@@ -2,7 +2,7 @@
 
     function renderStores() {
         const storesData = JSON.parse(getStores());
-        const stores = $('.stores');
+        const stores = $('#stores');
 
         $.each(storesData, (index, store) => {
             stores.append(`<option value='${store.Id}'>${store.Name}</option>`);
@@ -11,7 +11,7 @@
 
     function renderSuppliers() {
         const suppliersData = JSON.parse(getSuppliers());
-        const suppliers = $('.supplier');
+        const suppliers = $('#supplier');
 
         $.each(suppliersData, (index, supplier) => {
             suppliers.append(`<option value='${supplier.Id}'>${supplier.Name}</option>`);
@@ -56,4 +56,6 @@
 
     renderStores();
     renderSuppliers();
+
+    $('#Date').datepicker();
 });

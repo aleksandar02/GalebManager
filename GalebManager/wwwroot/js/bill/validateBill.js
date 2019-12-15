@@ -33,8 +33,29 @@
             required: 'Obavezno polje!'
         }
     }
+});
 
-    //submitHandler: function (form) {
-    //    form.submit();
-    //}
+$('#addFacture').validate({
+    rules: {
+        addFactureNumber: {
+            required: true
+        },
+        factureSum: {
+            required: true
+        },
+        factureDate: {
+            required: true
+        }
+    },
+    messages: {
+        addFactureNumber: {
+            required: 'Obavezno polje!'
+        },
+        factureSum: {
+            required: 'Obavezno polje!'
+        },
+        factureDate: {
+            required: 'Obavezno polje!'
+        }
+    }
 });

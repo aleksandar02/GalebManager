@@ -29,7 +29,7 @@
 
                 <div class="form-group">
                     <label asp-for="Date" class="control-label"></label>
-                    <input type="date" asp-for="Date" class="form-control" />
+                    <input type="text" asp-for="Date" class="form-control" />
                     <span asp-validation-for="Date" class="text-danger"></span>
                 </div>
                 <input type="hidden" asp-for="UserCreated" value="@User.Identity.Name" class="form-control" />
@@ -66,10 +66,12 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script src="~/js/bill/createBill.js"></script>
     <script src="~/js/datatables.min.js"></script>
     <script src="~/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/js/bill/createBill.js"></script>
 
     <link href="~/css/datatables.min.css" rel="stylesheet" />
     <link href="~/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/css/bootstrap-datepicker.min.css" rel="stylesheet" />
 }

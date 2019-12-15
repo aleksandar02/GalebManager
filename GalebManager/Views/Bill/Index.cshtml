@@ -4,112 +4,143 @@
     ViewData["Title"] = "Index";
 }
 
-    
 
-<div class="_card">
-    <h1 class="_card-title">Evidencija racuna</h1>
 
-    <div class="bill-actions">
-        <h3 class="mb-3">Pretraga</h3>
-        <form action="/Bill/Search" id="searchForm">
-            <div class="form-group">
-                <select id="stores" class="form-control stores">
-                    <option selected value="-1">Sve</option>
-                </select>
+    <div class="_card">
+        <h1 class="_card-title">Evidencija racuna</h1>
+
+        <div class="bill-actions">
+            <div class="d-flex justify-content-between align-items-end">
+                <form action="/Bill/Search" id="searchForm">
+                    <div class="form-group">
+                        <label for="stores">Radnja</label>
+                        <select id="stores" class="form-control form-control-sm stores">
+                            <option selected value="-1">Sve</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="supplier">Dobavljac</label>
+                        <select id="supplier" class="form-control form-control-sm supplier">
+                            <option selected value="-1">Sve</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="factured">Status fakture</label>
+                        <select id="factured" class="form-control form-control-sm">
+                            <option selected value="-1">Sve</option>
+                            <option value="1">Fakturisane</option>
+                            <option value="2">Nefakturisane</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateFrom">Od</label>
+                        <input type="text" class="form-control form-control-sm" id="dateFrom" />
+                    </div>
+                    <div class="form-group">
+                        <label for="dateTo">Do</label>
+                        <input type="text" class="form-control form-control-sm" id="dateTo" />
+                    </div>
+
+                    <button type="submit" class="btn btn-general btn--primary btn-sm shadow-md">Pretrazi</button>
+                </form>
+                <div>
+                    <div class="nav-item dropdown ">
+                        <a class="nav-link topnav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-fw"></i>
+                        </a>
+                        <div class="dropdown-menu card-dropdown fade" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/Bill/Create"><i class="fas fa-plus fa-sm fa-fw mr-2"></i>Novi racun</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-file-export fa-sm fa-fw mr-2"></i>Export</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <select id="supplier" class="form-control supplier">
-                    <option selected value="-1">Sve</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <select id="factured" class="form-control">
-                    <option selected value="-1">Sve</option>
-                    <option value="1">Fakturisane</option>
-                    <option value="2">Nefakturisane</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" id="dateFrom" />
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" id="dateTo" />
-            </div>
+        </div>
 
-            <button type="submit" class="btn btn-general btn--primary shadow-md">Pretrazi</button>
-            <a href="/Bill/Create" class="btn btn-general btn--light-green shadow-md">Novi racun</a>
-        </form>
-    </div>
-
-    <table class="table" id="billTable">
-        <thead class="billTableTr">
-            <tr>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.StoreId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Number)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FactureNumber)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SupplierId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Date)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.Sum)
-                </th>
-
-                <th></th>
-            </tr>
-        </thead>
-        <tbody id="billTableData">
-            @foreach (var item in Model)
-            {
-                var formattedDate = item.Date.ToString("MM/dd/yyyy");
+        <table class="table" id="billTable">
+            <thead class="billTableTr">
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StoreName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Number)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FactureNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SupplierName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => formattedDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Sum)
-                    </td>
 
-                    <td>
-                        <a href="#" class="action-link edit-link" id="@item.Id" onclick="showUpdateBillModal(this);"><i class="fas fa-pen fa-fw"></i>&nbsp;Izmena</a>
-                        <a href="#" class="action-link details-link"><i class="fas fa-info fa-fw"></i>&nbsp;Detalji</a>
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StoreId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Number)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FactureNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SupplierId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Sum)
+                    </th>
+
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody id="billTableData">
+                @foreach (var item in Model)
+                {
+                    var formattedDate = item.Date.ToString("MM/dd/yyyy");
+                    <tr id="@item.Id">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StoreName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Number)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FactureNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SupplierName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => formattedDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sum)
+                        </td>
+                       
 
-    <div class="modal fade mt-5" id="editBillModal">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+                        <td class="text-right">
+                            @if (item.FactureNumber == "")
+                            {
+                                <a href="#" class="action-link facture-link" id="${bill.id}" onclick="showAddFactureModal(this);"><i class="fas fa-plus fa-fw"></i>&nbsp;Faktura</a>
+                            }
+                            <a href="#" class="action-link edit-link" id="@item.Id" onclick="showUpdateBillModal(this);"><i class="fas fa-pen fa-fw"></i>&nbsp;Izmena</a>
+                            <a href="#" class="action-link details-link"><i class="fas fa-info fa-fw"></i>&nbsp;Detalji</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="modal fade mt-5" id="editBillModal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
 
 
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade mt-5" id="addFactureModal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 @section Scripts {
@@ -120,9 +151,9 @@
 
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
 
+    <script src="~/js/bill/validateBill.js"></script>
     <script src="~/js/bill/createBill.js"></script>
     <script src="~/js/bill/bill.js"></script>
-    <script src="~/js/bill/validateBill.js"></script>
 
     <link href="~/css/bootstrap-datepicker.min.css" rel="stylesheet" />
     <link href="~/css/datatables.min.css" rel="stylesheet" />

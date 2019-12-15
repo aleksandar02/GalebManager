@@ -13,9 +13,10 @@ namespace GalebManager.Models
         [Display(Name = "Prodavnica")]
         [Required(ErrorMessage = "Obavezno polje!")]
         public int StoreId { get; set; }
+        
+        public string StoreName { get; set; }
         [Display(Name = "Broj racuna")]
         [Required(ErrorMessage = "Obavezno polje!")]
-        public string StoreName { get; set; }
         public string Number { get; set; }
         [Display(Name = "Broj fakture")]
         public string FactureNumber { get; set; }

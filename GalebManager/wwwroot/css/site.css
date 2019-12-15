@@ -26,7 +26,7 @@ body, html {
     margin: 0;
     padding: 0;
     position: relative;
-    background: var(--light);
+    background: #f9fafb;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -47,7 +47,8 @@ ul {
 ================================= */
 
 .navbar {
-    box-shadow: rgba(58, 59, 69, 0.15) 0px 2.4px 28px 0px;
+    /*box-shadow: rgba(58, 59, 69, 0.15) 0px 2.4px 28px 0px;*/
+    border-bottom: 1px solid var(--light);
     height: 8vh;
     position: fixed;
     top: 0;
@@ -97,12 +98,21 @@ ul {
 /* =================================
       Top Navigation Dropdown
 ================================= */
+.dropdown-menu.fade {
+    display: block;
+    opacity: 0;
+    pointer-events: none;
+}
 
+.show > .dropdown-menu.fade {
+    pointer-events: auto;
+    opacity: 1;
+}
 .dropdown-menu {
     margin-top: 10px;
-    border: none;
-    border-radius: 0.625rem;
-    box-shadow: rgba(58, 59, 69, 0.15) 0px 2.4px 28px 0px;
+    border: 1px solid var(--light);
+    border-radius: 2px;
+    z-index: 9999999 !important;
 }
 
 .dropdown-item {
@@ -130,12 +140,15 @@ ul {
 }
 
 .dropdown-menu.topnav-dropdown.show {
-    left: -140px;
 }
 
 .user-dropdown {
     left: -40px;
     width: 100px;
+}
+
+.card-dropdown {
+    left: -50px !important;
 }
 
 /* =================================
@@ -160,11 +173,13 @@ aside {
     padding: 15px;
 }
 
+
+
 .sidebar-item {
     margin: 5px 0;
     padding: 10px 15px;
     transition: background 250ms ease;
-    border-radius: 0.625rem;
+    border-radius: 2px;
     position: relative;
 }
 
@@ -173,7 +188,7 @@ aside {
     }
 
         .sidebar-item:hover .sidebar-item .caret {
-            z-index: 9999999 !important;
+            z-index: 999 !important;
         }
 
     .sidebar-item .caret {
@@ -195,10 +210,10 @@ aside {
         transition: all 250ms ease;
     }
 
-    .sidebar-dropdown-item:hover {
-        background: var(--white);
-        color: var(--dark);
-    }
+        .sidebar-dropdown-item:hover {
+            background: #f9fafb;
+            color: var(--dark);
+        }
 
 .sidebar-dropdown-link {
     color: var(--dark);
@@ -240,10 +255,6 @@ aside {
     background: var(--light);
 }
 
-    .active a {
-        color: var(--primary);
-        font-weight: 500;
-    }
 
 /* =================================
       Page Content Wrapper
@@ -264,10 +275,45 @@ aside {
 }
 
 /* =================================
+         DatePicker
+================================= */
+.datepicker {
+    z-index: 9999999999 !important;
+    padding: 10px !important;
+    border-radius: 0px !important;
+}
+
+    .datepicker th.prev,
+    .datepicker th.next,
+    .datepicker th.datepicker-switch {
+        border-radius: 0px !important;
+        padding: 4px;
+    }
+    .datepicker th.datepicker-switch {
+        padding: 4px;
+        margin-bottom: 5px !important;
+    }
+        .datepicker td {
+            margin: 5px !important;
+        }
+
+    .datepicker td:hover {
+        border-radius: 0px !important;
+    }
+
+    .datepicker td.active.day {
+        background: var(--dark-primary) !important;
+        box-shadow: none !important;
+        border: 1px solid var(--dark-primary) !important;
+        border-radius: 0px !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+    }
+
+/* =================================
             Modal
 ================================= */
 .modal {
-    z-index: 9999999999!important
+    z-index: 999999999!important
 }
 .modal-title {
     color: var(--gray);
@@ -345,18 +391,15 @@ aside {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid transparent;
-    border-radius: 0;
+    border: 1px solid var(--light);
+    border-radius: 2px;
     background: var(--white);
     color: #fff !important;
     padding: 30px;
-    border-radius: 0.625rem;
     transition: all 150ms ease;
 }
 
-._panel:hover {
-    background: #fafafa;
-}
+
 
 ._panel-inner {
     text-align: center;
@@ -391,12 +434,11 @@ aside {
 ================================= */
 
 ._card {
-    border: 1px solid transparent;
-    border-radius: 0;
+    border: 1px solid var(--light);
+    border-radius: 2px;
     background: var(--white);
     color: var(--dark) !important;
     padding: 30px;
-    border-radius: 0.625rem;
     transition: all 150ms ease;
 }
 
@@ -422,6 +464,9 @@ aside {
 .btn {
     box-shadow: none !important;
 }
+
+
+
 
 /* =================================
          Table
@@ -518,6 +563,13 @@ button.table-link:hover {
         font-size: 14px;
     }
 
+.facture-link {
+    color: var(--danger);
+}
+.facture-link:hover {
+    color: var(--dark-danger);
+}
+
 .edit-link {
     color: var(--green);
 }
@@ -538,12 +590,15 @@ button.table-link:hover {
              Bill Actions
 ================================= */
 .bill-actions {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 .bill-actions form {
     display: flex;
-    align-items:center;
-    justify-content: space-between;
+    align-items:flex-end;
+}
+
+.bill-actions .form-group {
+    margin-right: 15px;
 }
 
 .bill-actions form input {
@@ -552,6 +607,15 @@ button.table-link:hover {
 
 .bill-actions form .form-group {
     margin-bottom: 0px;
+}
+
+label {
+    margin-bottom: 2px;
+    font-size: 0.8rem;
+}
+
+.btn-sm {
+    padding: 5px 22px !important;
 }
 
 /* =================================
