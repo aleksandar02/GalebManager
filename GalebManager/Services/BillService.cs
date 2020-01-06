@@ -66,5 +66,10 @@ namespace GalebManager.Services
         {
             return await _billDal.SearchBills(filterDto);
         }
+
+        public bool AddFacture(int id, InvoiceDto invoiceDto)
+        {
+            return _billDal.AddFacture(id, invoiceDto); 
+        }
     }
 }

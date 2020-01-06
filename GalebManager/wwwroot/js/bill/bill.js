@@ -185,10 +185,10 @@ function renderAlert(type, message) {
     </div>`);
 
     setTimeout(function () {
-        $('#alert').fadeOut(500, function () {
+        $('#alert').fadeOut(700, function () {
             $(this).remove();
         });
-    }, 2500);
+    }, 3000);
 }
 
 function renderAddFactureModal(bill) {
@@ -206,23 +206,27 @@ function renderAddFactureModal(bill) {
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="addFactureNumber" class="control-label">Broj racuna</label>
+                                            <label for="addFactureNumber" class="control-label">Broj fakture</label>
                                             <input name="addFactureNumber" id="addFactureNumber" value="" class="form-control" required />
                                         </div>
                                         <div class="form-group">
-                                            <label for="factureSum" class="control-label">Broj racuna</label>
+                                            <label for="factureSum" class="control-label">Iznos</label>
                                             <input name="factureSum" id="factureSum" value="" class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="factureDate" class="control-label">Broj racuna</label>
-                                            <input name="factureDate" id="factureDate" value="" class="form-control" required />
+                                            <label for="factureDate" class="control-label">Datum</label>
+                                            <input type="text" name="factureDate" id="factureDate" value="" class="form-control" required />
                                         </div>
 
                                         <input type="hidden" id="billId" value="${bill.Id}" />
                                     </div>
                                 </div>
+                            <input type="hidden" id="storeId" name="storeId" value="${bill.StoreId}" />
+                            <input type="hidden" id="supplierId" name="supplierId" value="${bill.SupplierId}" />
+                            <input type="hidden" id="billNumber" name="billNumber" value="${bill.Number}" />
+
 
                     </div>
 
@@ -277,7 +281,7 @@ function getByIdRequest(url) {
     return output;
 }
 
-function updateBillRequest(url, data) {
+function postRequest(url, data) {
     let output = false;
 
     $.ajax({
@@ -298,6 +302,7 @@ function updateBillRequest(url, data) {
 
     return output;
 }
+
 
 $('#editBillModal').on('hidden.bs.modal', () => {
     let modalContent = $('#editBillModal .modal-content');
@@ -348,6 +353,10 @@ function showAddFactureModal(el) {
     bill = JSON.parse(getByIdRequest(url));
 
     renderAddFactureModal(bill);
+    $('#factureDate').datepicker(
+        'setDate', 'now'
+    ).datepicker();
+
     handleAddFacture();
 
     modal.modal('show');
@@ -383,9 +392,11 @@ function handleFacturedUpdateBill() {
             };
 
             const url = "/Bill/UpdateFacturedBill/" + id;
-            const response = JSON.parse(updateBillRequest(url, bill));
+            const response = JSON.parse(postRequest(url, bill));
 
             if (response) {
+                $("#editBillModal .close").click();
+
                 renderAlert('success', 'Uspesno izmenjen racun!');
                 let billFilter = createBillFilter();
 
@@ -401,14 +412,12 @@ function handleFacturedUpdateBill() {
                 renderAlert('danger', 'Doslo je do greske!');
             }
 
-            $("#editBillModal .close").click();
-
-
         } else {
             console.log('Invalid from!');
         }
     });
 }
+
 function handleAddFacture() {
     $('#addFacture').on('submit', function (e) {
         e.preventDefault();
@@ -417,11 +426,51 @@ function handleAddFacture() {
         const isValid = $('#addFacture').valid();
 
         if (isValid) {
-            console.log('Valid facture!');
+            const billId = $('#billId').val();
+            const storeId = $('#storeId').val();
+            const supplierId = $('#supplierId').val();
+            const billNumber = $('#billNumber').val();
+            const factureNumber = $('#addFactureNumber').val();
+            const date = $('#factureDate').val();
+            const sum = $('#factureSum').val();
 
-            // TODO: Insert in Db
-        } else {
-            console.log('Invalid facture data!');
+            let facture = {
+                "StoreId": storeId,
+                "SupplierId": supplierId,
+                "BillNumber": billNumber,
+                "Number": factureNumber,
+                "Date": date,
+                "Sum": sum
+            };
+
+            console.log(facture);
+
+            const url = "/Bill/AddFacture/" + billId;
+            const response = JSON.parse(postRequest(url, facture));
+
+            if (response) {
+                $("#addFactureModal .close").click();
+
+                renderAlert('success', 'Faktura je dodana!');
+                let billFilter = createBillFilter();
+
+                let bills = "";
+
+                bills = getRequest("/Bill/SearchBills", billFilter);
+
+                let container = $('#billTableData');
+                container.html("");
+
+                renderTableData(container, bills);
+            }
+
+            else {
+                renderAlert('danger', 'Doslo je do greske!');
+            }
+
+        }
+        else {
+            console.log('Invalid from!');
         }
 
     });

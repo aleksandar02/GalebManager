@@ -90,6 +90,42 @@ namespace Infrastructure.DAL
             return bills;
         }
 
+        public bool AddFacture(int id, InvoiceDto invoiceDto)
+        {
+            bool result = true;
+
+            try
+            {
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
+
+                    string sqlProcedure = "AddFactureToBill";
+                    var command = new SqlCommand(sqlProcedure, connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@BillId", id);
+                    command.Parameters.AddWithValue("@StoreId", invoiceDto.StoreId);
+                    command.Parameters.AddWithValue("@Number", invoiceDto.Number);
+                    command.Parameters.AddWithValue("@BillNumber", invoiceDto.BillNumber);
+                    command.Parameters.AddWithValue("@SupplierId", invoiceDto.SupplierId);
+                    command.Parameters.AddWithValue("@Date", invoiceDto.Date);
+                    command.Parameters.AddWithValue("@Sum", invoiceDto.Sum);
+                    command.Parameters.AddWithValue("@DateCreated", invoiceDto.DateCreated);
+                    command.Parameters.AddWithValue("@UserCreated", invoiceDto.UserCreated);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                result = false;
+            }
+
+            return result;
+        }
+
         public async Task<IEnumerable<BillDto>> SearchBills(BillFilterDto filterDto)
         {
             var bills = new List<BillDto>();

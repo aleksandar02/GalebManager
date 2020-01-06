@@ -5,7 +5,6 @@
 }
 
 
-
     <div class="_card">
         <h1 class="_card-title">Evidencija racuna</h1>
 
@@ -41,7 +40,7 @@
                         <input type="text" class="form-control form-control-sm" id="dateTo" />
                     </div>
 
-                    <button type="submit" class="btn btn-general btn--primary btn-sm shadow-md">Pretrazi</button>
+                    <button type="submit" class="btn btn-general btn--primary btn-sm">Pretrazi</button>
                 </form>
                 <div>
                     <div class="nav-item dropdown ">
@@ -113,7 +112,7 @@
                         <td class="text-right">
                             @if (item.FactureNumber == "")
                             {
-                                <a href="#" class="action-link facture-link" id="${bill.id}" onclick="showAddFactureModal(this);"><i class="fas fa-plus fa-fw"></i>&nbsp;Faktura</a>
+                                <a href="#" class="action-link facture-link" id="@item.Id" onclick="showAddFactureModal(this);"><i class="fas fa-plus fa-fw"></i>&nbsp;Faktura</a>
                             }
                             <a href="#" class="action-link edit-link" id="@item.Id" onclick="showUpdateBillModal(this);"><i class="fas fa-pen fa-fw"></i>&nbsp;Izmena</a>
                             <a href="#" class="action-link details-link"><i class="fas fa-info fa-fw"></i>&nbsp;Detalji</a>

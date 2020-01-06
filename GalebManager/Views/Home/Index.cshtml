@@ -2,47 +2,54 @@
     ViewData["Title"] = "Home Page";
 }
 
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-3">
-            <a href="#">
-                <div class="_panel fakture">
-                    <div class="_panel-inner">
+            <a href="/Invoice/Index">
+                <div class="_panel _panel-facture">
+                    <div class="d-flex flex-row align-items-center">
                         <i class="fas fa-fw fa-folder"></i>
-                        <h3>Fakture</h3>
+                        <div class="ml-4">
+                            <h6>3580</h6>
+                            <p>Faktura</p>
+                        </div>
                     </div>
                 </div>
             </a>
         </div>
         <div class="col-lg-3">
             <a href="/Bill/Index">
-                <div class="_panel racuni">
-                    <div class="_panel-inner">
-                        <i class="fas fa-fw fa-folder"></i>
-                        <h3>Racuni</h3>
+                <div class="_panel _panel-bill">
+                    <div class="d-flex flex-row align-items-center">
+                        <i class="fas fa-fw fa-money-bill"></i>
+                        <div class="ml-4">
+                            <h6>3580</h6>
+                            <p>Racuna</p>
+                        </div>
                     </div>
                 </div>
             </a>
         </div>
         <div class="col-lg-3">
-            <a href="#">
-                <div class="_panel pazari">
-                    <div class="_panel-inner text-center">
-                        <i class="fas fa-fw fa-money-check"></i>
-                        <h3>Pazari</h3>
+            <div class="_panel _panel-earnings">
+                <div class="d-flex flex-row align-items-center">
+                    <i class="fas fa-fw fa-money-check"></i>
+                    <div class="ml-4">
+                        <p>Pazar</p>
                     </div>
                 </div>
-            </a>
+            </div>
         </div>
         <div class="col-lg-3">
-            <a href="#">
-                <div class="_panel statistika">
-                    <div class="_panel-inner text-center">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <h3>Statistika</h3>
+            <div class="_panel _panel-statistics">
+                <div class="d-flex flex-row align-items-center">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <div class="ml-4">
+                        <p>Statistika</p>
                     </div>
                 </div>
-            </a>
+            </div>
         </div>
     </div>
 </div>

@@ -3,94 +3,136 @@
 @{
     ViewData["Title"] = "Index";
 }
+<div class="_card">
+    <h1 class="_card-title">Evidencija faktura</h1>
 
-<h1>Index</h1>
+    <div class="bill-actions">
+        <div class="d-flex justify-content-between align-items-end">
+            <form action="/Invoice/Search" id="searchForm">
+                <div class="form-group">
+                    <label for="stores">Radnja</label>
+                    <select id="stores" class="form-control form-control-sm stores">
+                        <option selected value="-1">Sve</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="supplier">Dobavljac</label>
+                    <select id="supplier" class="form-control form-control-sm supplier">
+                        <option selected value="-1">Sve</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="factured">Status fakture</label>
+                    <select id="factured" class="form-control form-control-sm">
+                        <option selected value="-1">Sve</option>
+                        <option value="1">Fakturisane</option>
+                        <option value="2">Nefakturisane</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="dateFrom">Od</label>
+                    <input type="text" class="form-control form-control-sm" id="dateFrom" />
+                </div>
+                <div class="form-group">
+                    <label for="dateTo">Do</label>
+                    <input type="text" class="form-control form-control-sm" id="dateTo" />
+                </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StoreId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StoreName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BillNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Number)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sum)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateCreated)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserCreated)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SupplierId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SupplierName)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StoreId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StoreName)
-            </td>
+                <button type="submit" class="btn btn-general btn--primary btn-sm">Pretrazi</button>
+            </form>
+            <div>
+                <div class="nav-item dropdown ">
+                    <a class="nav-link topnav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-fw"></i>
+                    </a>
+                    <div class="dropdown-menu card-dropdown fade" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/Bill/Create"><i class="fas fa-plus fa-sm fa-fw mr-2"></i>Novi racun</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-file-export fa-sm fa-fw mr-2"></i>Export</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="table">
+        <thead class="billTableTr">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.StoreId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Number)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BillNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SupplierId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.BillNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Number)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sum)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateCreated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserCreated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SupplierId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SupplierName)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                <th>
+                    @Html.DisplayNameFor(model => model.Sum)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="factureTableData">
+            @foreach (var item in Model)
+            {
+                var formattedDate = item.Date.ToString("MM/dd/yyyy");
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StoreName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Number)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BillNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SupplierName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => formattedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sum)
+                    </td>
+
+
+
+                    <td class="text-right">
+                        @if (item.BillNumber == "")
+                        {
+                            <a href="#" class="action-link facture-link" id="@item.Id" onclick="showAddFactureModal(this);"><i class="fas fa-plus fa-fw"></i>&nbsp;Bill</a>
+                        }
+                        <a href="#" class="action-link edit-link" id="@item.Id" onclick="showUpdateBillModal(this);"><i class="fas fa-pen fa-fw"></i>&nbsp;Izmena</a>
+                        <a href="#" class="action-link details-link"><i class="fas fa-info fa-fw"></i>&nbsp;Detalji</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="modal fade mt-5" id="editFactureModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade mt-5" id="addBillModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+
+            </div>
+        </div>
+    </div>
+</div>

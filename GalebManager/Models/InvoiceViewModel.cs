@@ -1,6 +1,7 @@
 ﻿using Core.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,14 +10,25 @@ namespace GalebManager.Models
     public class InvoiceViewModel
     {
         public int Id { get; set; }
+        [Display(Name = "Prodavnica")]
+        [Required(ErrorMessage = "Obavezno polje!")]
         public int StoreId { get; set; }
         public string StoreName { get; set; }
+        [Display(Name = "Broj racuna")]
         public string BillNumber { get; set; }
+        [Display(Name = "Broj fakture")]
+        [Required(ErrorMessage = "Obavezno polje!")] 
         public string Number { get; set; }
+        [Display(Name = "Iznos")]
+        [Required(ErrorMessage = "Obavezno polje!")] 
         public decimal Sum { get; set; }
+        [Display(Name = "Datum")]
+        [Required(ErrorMessage = "Obavezno polje!")] 
         public DateTime Date { get; set; }
         public DateTime DateCreated { get; set; }
         public string UserCreated { get; set; }
+        [Display(Name = "Dobavljac")]
+        [Required(ErrorMessage = "Obavezno polje!")] 
         public int SupplierId { get; set; }
         public string SupplierName { get; set; }
 

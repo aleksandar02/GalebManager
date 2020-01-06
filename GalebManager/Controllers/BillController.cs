@@ -32,7 +32,7 @@ namespace GalebManager.Controllers
 
             var billDtos = await _billService.SearchBills(filter);
             var billViewModels = billDtos.Select(BillViewModel.MapTo);
-           
+
             return View(billViewModels);
         }
 
@@ -56,7 +56,7 @@ namespace GalebManager.Controllers
         {
             try
             {
-                if(!ModelState.IsValid)
+                if (!ModelState.IsValid)
                 {
                     return View();
                 }
@@ -99,6 +99,27 @@ namespace GalebManager.Controllers
                 var billDto = BillViewModel.MapFrom(billViewModel);
 
                 bool result = _billService.UpdateBill(billDto.Id, billDto);
+
+                return result;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        [HttpPost]
+        public bool AddFacture([FromRoute]int id, string json)
+        {
+            try
+            {
+                var invoiceViewModel = JsonConvert.DeserializeObject<InvoiceViewModel>(json);
+                invoiceViewModel.DateCreated = DateTime.Now;
+                invoiceViewModel.UserCreated = User.Identity.Name;
+
+                var invoiceDto = InvoiceViewModel.MapFrom(invoiceViewModel);
+
+                bool result = _billService.AddFacture(id, invoiceDto);
 
                 return result;
             }
