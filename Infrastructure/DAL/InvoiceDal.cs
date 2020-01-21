@@ -52,6 +52,82 @@ namespace Infrastructure.DAL
             return result;
         }
 
+        public async Task<IEnumerable<InvoiceDto>> SearchInvoices(InvoiceFilterDto filter)
+        {
+            var invoices = new List<InvoiceDto>();
+
+            try
+            {
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
+
+                    string sqlProcedure = "SearchInvoices";
+                    var command = new SqlCommand(sqlProcedure, connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@StoreId", filter.StoreId);
+                    command.Parameters.AddWithValue("@SupplierId", filter.SupplierId);
+                    command.Parameters.AddWithValue("@DateFrom", filter.DateFrom);
+                    command.Parameters.AddWithValue("@DateTo", filter.DateTo);
+                    command.Parameters.AddWithValue("@FactureStatus", filter.FactureStatus);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (await reader.ReadAsync().ConfigureAwait(false))
+                        {
+                            var invoice = new InvoiceDto();
+                            invoice = MapToInvoiceDto(reader);
+
+                            invoices.Add(invoice);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+            }
+
+            return invoices;
+        }
+
+        public bool AddBill(int id, BillDto billDto)
+        {
+            bool result = true;
+
+            try
+            {
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
+
+                    string sqlProcedure = "AddBillToFacture";
+                    var command = new SqlCommand(sqlProcedure, connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@InvoiceId", id);
+                    command.Parameters.AddWithValue("@StoreId", billDto.StoreId);
+                    command.Parameters.AddWithValue("@Number", billDto.Number);
+                    command.Parameters.AddWithValue("@FactureNumber", billDto.FactureNumber);
+                    command.Parameters.AddWithValue("@SupplierId", billDto.SupplierId);
+                    command.Parameters.AddWithValue("@Date", billDto.Date);
+                    command.Parameters.AddWithValue("@Sum", billDto.Sum);
+                    command.Parameters.AddWithValue("@DateCreated", billDto.DateCreated);
+                    command.Parameters.AddWithValue("@UserCreated", billDto.UserCreated);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                result = false;
+            }
+
+            return result;
+        }
+
         public Task<InvoiceDto> GetInvoicesByBillNumber(string billNumber)
         {
             throw new NotImplementedException();

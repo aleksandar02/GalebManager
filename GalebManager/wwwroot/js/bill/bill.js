@@ -1,64 +1,65 @@
-﻿$(function () {
-    $('#billTable').DataTable({
-        "processing": true,
-        "language": {
-            "search": "",
-            "zeroRecords": "Nema rezultata!"
-        },
-        "pageLength": 10,
-        "lengthChange": false,
-        "info": false,
-        "bFilter": false
-    });
+﻿$(function() {
+  $('#billTable').DataTable({
+    processing: true,
+    language: {
+      search: '',
+      zeroRecords: 'Nema rezultata!'
+    },
+    pageLength: 10,
+    lengthChange: false,
+    info: false,
+    bFilter: false
+  });
 
-    $('#dateFrom').datepicker(
-        'setDate', '-30d'
-    );
-    $('#dateTo').datepicker(
-        'setDate', 'now'
-    );
-
+  $('#dateFrom').datepicker('setDate', '-30d');
+  $('#dateTo').datepicker('setDate', 'now');
 });
 
 // Search
-$('#searchForm').submit(function (e) {
-    e.preventDefault();
+$('#searchForm').submit(function(e) {
+  e.preventDefault();
 
-    let billFilter = createBillFilter();
+  let billFilter = createBillFilter();
 
-    let bills = "";
+  let bills = '';
 
-    bills = getRequest("/Bill/SearchBills", billFilter);
+  bills = getRequest('/Bill/SearchBills', billFilter);
 
-    let container = $('#billTableData');
-    container.html("");
+  console.log(bills);
 
-    renderTableData(container, bills);
+  let container = $('#billTableData');
+  container.html('');
+
+  renderTableData(container, bills);
 });
 
 function createBillFilter() {
-    const store = $("#stores option").filter(":selected").val();
-    const supplier = $("#supplier option").filter(":selected").val();
-    const factureStatus = $('#factured').val();
-    const dateFrom = $('#dateFrom').val();
-    const dateTo = $('#dateTo').val();
+  const store = $('#stores option')
+    .filter(':selected')
+    .val();
+  const supplier = $('#supplier option')
+    .filter(':selected')
+    .val();
+  const factureStatus = $('#factured').val();
+  const dateFrom = $('#dateFrom').val();
+  const dateTo = $('#dateTo').val();
 
-    let billFilter = {
-        storeId: store,
-        supplierId: supplier,
-        factureStatus: factureStatus,
-        dateFrom: dateFrom,
-        dateTo: dateTo
-    };
+  let billFilter = {
+    storeId: store,
+    supplierId: supplier,
+    factureStatus: factureStatus,
+    dateFrom: dateFrom,
+    dateTo: dateTo
+  };
 
-    return billFilter;
+  return billFilter;
 }
 
 // Render Content
-function renderFacturedUpdateModalData(bill) {
-    let modalContent = $('#editBillModal .modal-content');
+function renderUpdateModalData(bill) {
+  let modalContent = $('#editBillModal .modal-content');
 
-    modalContent.append(`<form actiob="" id="updateBillForm">
+  modalContent.append(`<form actiob="" id="updateBillForm">
 
                     <div class="modal-header">
                         <h4 class="modal-title">Izmena racuna</h4>
@@ -118,13 +119,13 @@ function renderFacturedUpdateModalData(bill) {
 }
 
 function renderTableData(container, bills) {
-    $.each(bills, (index, bill) => {
-        const formattedDate = moment(bill.date).format('MM/DD/YYYY');
+  $.each(bills, (index, bill) => {
+    const formattedDate = moment(bill.date).format('MM/DD/YYYY');
 
-        const isFactured = bill.factureNumber === "" ? false : true;
+    const isFactured = bill.factureNumber === '' ? false : true;
 
-        if (isFactured) {
-            container.append(`<tr>
+    if (isFactured) {
+      container.append(`<tr>
                     <td>
                         ${bill.storeName}
                     </td>
@@ -148,8 +149,8 @@ function renderTableData(container, bills) {
                         <a href="#" class="action-link details-link"><i class="fas fa-info fa-fw"></i>&nbsp;Detalji</a>
                     </td>
                 </tr>`);
-        } else {
-            container.append(`<tr>
+    } else {
+      container.append(`<tr>
                     <td>
                         ${bill.storeName}
                     </td>
@@ -175,26 +176,26 @@ function renderTableData(container, bills) {
                         <a href="#" class="action-link details-link"><i class="fas fa-info fa-fw"></i>&nbsp;Detalji</a>
                     </td>
                 </tr>`);
-        }
-    });
+    }
+  });
 }
 
 function renderAlert(type, message) {
-    $('#content-wrapper').append(`<div id="alert" class="_alert alert--${type}">
+  $('#content-wrapper').append(`<div id="alert" class="_alert alert--${type}">
         <p><i class="fas fa-check"></i><span>${message}</span></p>
     </div>`);
 
-    setTimeout(function () {
-        $('#alert').fadeOut(700, function () {
-            $(this).remove();
-        });
-    }, 3000);
+  setTimeout(function() {
+    $('#alert').fadeOut(700, function() {
+      $(this).remove();
+    });
+  }, 3000);
 }
 
 function renderAddFactureModal(bill) {
-    let modalContent = $('#addFactureModal .modal-content');
+  let modalContent = $('#addFactureModal .modal-content');
 
-    modalContent.append(`<form id="addFacture">
+  modalContent.append(`<form id="addFacture">
 
                     <div class="modal-header">
                         <h4 class="modal-title">Dodaj fakturu</h4>
@@ -239,300 +240,291 @@ function renderAddFactureModal(bill) {
 
 // Ajax Requests
 function getRequest(url, data) {
-    let output = "";
+  let output = '';
 
-    $.ajax({
-        url: url,
-        type: 'GET',
-        dataType: 'json',
-        contentType: 'application/json',
-        async: false,
-        data: {
-            json: JSON.stringify(data)
-        },
-        error: function (e) {
-            console.log('Neuspeh!');
-        },
-        success: function (response) {
-            output = response;
-        }
-    });
+  $.ajax({
+    url: url,
+    type: 'GET',
+    dataType: 'json',
+    contentType: 'application/json',
+    async: false,
+    data: {
+      json: JSON.stringify(data)
+    },
+    error: function(e) {
+      console.log('Neuspeh!');
+    },
+    success: function(response) {
+      output = response;
+    }
+  });
 
-    return output;
+  return output;
 }
 
 function getByIdRequest(url) {
-    let output = "";
+  let output = '';
 
-    $.ajax({
-        url: url,
-        type: 'GET',
-        dataType: 'json',
-        contentType: 'application/json',
-        async: false,
-        error: function (e) {
-            console.log('Neuspeh!');
-        },
-        success: function (response) {
-            output = response;
-        }
-    });
+  $.ajax({
+    url: url,
+    type: 'GET',
+    dataType: 'json',
+    contentType: 'application/json',
+    async: false,
+    error: function(e) {
+      console.log('Neuspeh!');
+    },
+    success: function(response) {
+      output = response;
+    }
+  });
 
-    return output;
+  return output;
 }
 
 function postRequest(url, data) {
-    let output = false;
+  let output = false;
 
-    $.ajax({
-        url: url,
-        type: 'POST',
-        dataType: 'json',
-        async: false,
-        data: {
-            json: JSON.stringify(data)
-        },
-        error: function (e) {
-            return false;
-        },
-        success: function (response) {
-            output = response;
-        }
-    });
+  $.ajax({
+    url: url,
+    type: 'POST',
+    dataType: 'json',
+    async: false,
+    data: {
+      json: JSON.stringify(data)
+    },
+    error: function(e) {
+      return false;
+    },
+    success: function(response) {
+      output = response;
+    }
+  });
 
-    return output;
+  return output;
 }
 
-
 $('#editBillModal').on('hidden.bs.modal', () => {
-    let modalContent = $('#editBillModal .modal-content');
+  let modalContent = $('#editBillModal .modal-content');
 
-    modalContent.html('');
+  modalContent.html('');
 });
 
 $('#addFactureModal').on('hidden.bs.modal', () => {
-    let modalContent = $('#addFactureModal .modal-content');
+  let modalContent = $('#addFactureModal .modal-content');
 
-    modalContent.html('');
+  modalContent.html('');
 });
 
 // Show Modals
-
 function showUpdateBillModal(el) {
-    const modal = $('#editBillModal');
+  const modal = $('#editBillModal');
 
-    const url = '/Bill/Details/' + el.id;
-    let bill = "";
+  const url = '/Bill/Details/' + el.id;
+  let bill = '';
 
-    bill = JSON.parse(getByIdRequest(url));
+  bill = JSON.parse(getByIdRequest(url));
 
-    renderFacturedUpdateModalData(bill);
-    handleFacturedUpdateBill();
+  renderUpdateModalData(bill);
+  handleUpdateInvoice();
 
-    const formattedDate = moment(bill.Date).format('MM/DD/YYYY');
+  const formattedDate = moment(bill.Date).format('MM/DD/YYYY');
 
-    renderStores();
-    renderSuppliers();
+  renderStores();
+  renderSuppliers();
 
-    $('#updateStores').val(bill.StoreId);
-    $('#updateSuppliers').val(bill.SupplierId);
+  $('#updateStores').val(bill.StoreId);
+  $('#updateSuppliers').val(bill.SupplierId);
 
-    $('#updateBillDate').datepicker(
-        'setDate', formattedDate
-    ).datepicker();
+  $('#updateBillDate')
+    .datepicker('setDate', formattedDate)
+    .datepicker();
 
-    modal.modal('show');
+  modal.modal('show');
 }
 
 function showAddFactureModal(el) {
-    const modal = $('#addFactureModal');
+  const modal = $('#addFactureModal');
 
-    const url = '/Bill/Details/' + el.id;
-    let bill = "";
+  const url = '/Bill/Details/' + el.id;
+  let bill = '';
 
-    bill = JSON.parse(getByIdRequest(url));
+  bill = JSON.parse(getByIdRequest(url));
 
-    renderAddFactureModal(bill);
-    $('#factureDate').datepicker(
-        'setDate', 'now'
-    ).datepicker();
+  renderAddFactureModal(bill);
+  $('#factureDate')
+    .datepicker('setDate', 'now')
+    .datepicker();
 
-    handleAddFacture();
+  handleAddBill();
 
-    modal.modal('show');
+  modal.modal('show');
 }
 
 // Handle Forms
-function handleFacturedUpdateBill() {
-    $('#updateBillForm').on('submit', function (e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
+function handleUpdateInvoice() {
+  $('#updateBillForm').on('submit', function(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
 
-        const isValid = $('#updateBillForm').valid();
+    const isValid = $('#updateBillForm').valid();
 
-        if (isValid === true) {
+    if (isValid === true) {
+      // TODO: Get value and send them to server
+      const id = $('#billId').val();
+      const store = $('#updateStores option')
+        .filter(':selected')
+        .val();
+      const supplier = $('#updateSuppliers option')
+        .filter(':selected')
+        .val();
+      const number = $('#updateBillNumber').val();
+      const factureNumber = $('#updateFactureNumber').val();
+      const sum = $('#updateBillSum').val();
+      const date = $('#updateBillDate').val();
 
-            // TODO: Get value and send them to server
-            const id = $('#billId').val();
-            const store = $("#updateStores option").filter(":selected").val();
-            const supplier = $("#updateSuppliers option").filter(":selected").val();
-            const number = $('#updateBillNumber').val();
-            const factureNumber = $('#updateFactureNumber').val();
-            const sum = $('#updateBillSum').val();
-            const date = $('#updateBillDate').val();
+      let bill = {
+        Id: id,
+        StoreId: store,
+        SupplierId: supplier,
+        Number: number,
+        FactureNumber: factureNumber,
+        Sum: sum,
+        Date: date
+      };
 
-            let bill = {
-                "Id": id,
-                "StoreId": store,
-                "SupplierId": supplier,
-                "Number": number,
-                "FactureNumber": factureNumber,
-                "Sum": sum,
-                "Date": date
-            };
+      const url = '/Bill/UpdateFacturedBill/' + id;
+      const response = JSON.parse(postRequest(url, bill));
 
-            const url = "/Bill/UpdateFacturedBill/" + id;
-            const response = JSON.parse(postRequest(url, bill));
+      if (response) {
+        $('#editBillModal .close').click();
 
-            if (response) {
-                $("#editBillModal .close").click();
+        renderAlert('success', 'Uspesno izmenjen racun!');
+        let billFilter = createBillFilter();
 
-                renderAlert('success', 'Uspesno izmenjen racun!');
-                let billFilter = createBillFilter();
+        let bills = '';
 
-                let bills = "";
+        bills = getRequest('/Bill/SearchBills', billFilter);
 
-                bills = getRequest("/Bill/SearchBills", billFilter);
+        let container = $('#billTableData');
+        container.html('');
 
-                let container = $('#billTableData');
-                container.html("");
-
-                renderTableData(container, bills);
-            } else {
-                renderAlert('danger', 'Doslo je do greske!');
-            }
-
-        } else {
-            console.log('Invalid from!');
-        }
-    });
+        renderTableData(container, bills);
+      } else {
+        renderAlert('danger', 'Doslo je do greske!');
+      }
+    } else {
+      console.log('Invalid from!');
+    }
+  });
 }
 
-function handleAddFacture() {
-    $('#addFacture').on('submit', function (e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
+function handleAddBill() {
+  $('#addFacture').on('submit', function(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
 
-        const isValid = $('#addFacture').valid();
+    const isValid = $('#addFacture').valid();
 
-        if (isValid) {
-            const billId = $('#billId').val();
-            const storeId = $('#storeId').val();
-            const supplierId = $('#supplierId').val();
-            const billNumber = $('#billNumber').val();
-            const factureNumber = $('#addFactureNumber').val();
-            const date = $('#factureDate').val();
-            const sum = $('#factureSum').val();
+    if (isValid) {
+      const billId = $('#billId').val();
+      const storeId = $('#storeId').val();
+      const supplierId = $('#supplierId').val();
+      const billNumber = $('#billNumber').val();
+      const factureNumber = $('#addFactureNumber').val();
+      const date = $('#factureDate').val();
+      const sum = $('#factureSum').val();
 
-            let facture = {
-                "StoreId": storeId,
-                "SupplierId": supplierId,
-                "BillNumber": billNumber,
-                "Number": factureNumber,
-                "Date": date,
-                "Sum": sum
-            };
+      let facture = {
+        StoreId: storeId,
+        SupplierId: supplierId,
+        BillNumber: billNumber,
+        Number: factureNumber,
+        Date: date,
+        Sum: sum
+      };
 
-            console.log(facture);
+      console.log(facture);
 
-            const url = "/Bill/AddFacture/" + billId;
-            const response = JSON.parse(postRequest(url, facture));
+      const url = '/Bill/AddFacture/' + billId;
+      const response = JSON.parse(postRequest(url, facture));
 
-            if (response) {
-                $("#addFactureModal .close").click();
+      if (response) {
+        $('#addFactureModal .close').click();
 
-                renderAlert('success', 'Faktura je dodana!');
-                let billFilter = createBillFilter();
+        renderAlert('success', 'Faktura je dodana!');
+        let billFilter = createBillFilter();
 
-                let bills = "";
+        let bills = '';
 
-                bills = getRequest("/Bill/SearchBills", billFilter);
+        bills = getRequest('/Bill/SearchBills', billFilter);
 
-                let container = $('#billTableData');
-                container.html("");
+        let container = $('#billTableData');
+        container.html('');
 
-                renderTableData(container, bills);
-            }
-
-            else {
-                renderAlert('danger', 'Doslo je do greske!');
-            }
-
-        }
-        else {
-            console.log('Invalid from!');
-        }
-
-    });
+        renderTableData(container, bills);
+      } else {
+        renderAlert('danger', 'Doslo je do greske!');
+      }
+    } else {
+      console.log('Invalid from!');
+    }
+  });
 }
-
-
-
-
-
 
 /* From create bill */
 function renderStores() {
-    const storesData = JSON.parse(getStores());
-    const stores = $('#updateStores');
+  const storesData = JSON.parse(getStores());
+  const stores = $('#updateStores');
 
-    $.each(storesData, (index, store) => {
-        stores.append(`<option value='${store.Id}'>${store.Name}</option>`);
-    });
+  $.each(storesData, (index, store) => {
+    stores.append(`<option value='${store.Id}'>${store.Name}</option>`);
+  });
 }
 
 function renderSuppliers() {
-    const suppliersData = JSON.parse(getSuppliers());
-    const suppliers = $('#updateSuppliers');
+  const suppliersData = JSON.parse(getSuppliers());
+  const suppliers = $('#updateSuppliers');
 
-    $.each(suppliersData, (index, supplier) => {
-        suppliers.append(`<option value='${supplier.Id}'>${supplier.Name}</option>`);
-    });
+  $.each(suppliersData, (index, supplier) => {
+    suppliers.append(
+      `<option value='${supplier.Id}'>${supplier.Name}</option>`
+    );
+  });
 }
 
 function getStores() {
-    let output = "";
-    $.ajax({
-        url: '/Meta/GetStores',
-        type: 'GET',
-        async: false,
-        dataType: 'json',
-        error: function (e) {
-            console.log('Neuspeh!');
-        },
-        success: function (response) {
-            output = response;
-        }
-    });
+  let output = '';
+  $.ajax({
+    url: '/Meta/GetStores',
+    type: 'GET',
+    async: false,
+    dataType: 'json',
+    error: function(e) {
+      console.log('Neuspeh!');
+    },
+    success: function(response) {
+      output = response;
+    }
+  });
 
-    return output;
+  return output;
 }
 
 function getSuppliers() {
-    let output = "";
-    $.ajax({
-        url: '/Meta/GetSuppliers',
-        type: 'GET',
-        async: false,
-        dataType: 'json',
-        error: function (e) {
-            console.log('Neuspeh!');
-        },
-        success: function (response) {
-            output = response;
-        }
-    });
+  let output = '';
+  $.ajax({
+    url: '/Meta/GetSuppliers',
+    type: 'GET',
+    async: false,
+    dataType: 'json',
+    error: function(e) {
+      console.log('Neuspeh!');
+    },
+    success: function(response) {
+      output = response;
+    }
+  });
 
-    return output;
+  return output;
 }
-

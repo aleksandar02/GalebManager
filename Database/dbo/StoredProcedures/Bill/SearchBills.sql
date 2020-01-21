@@ -8,7 +8,7 @@
 )
 AS
 	BEGIN
-		SELECT 
+		SELECT DISTINCT
 			B.[Id],
 			B.[StoreId],
 			B.[Number],
@@ -32,4 +32,7 @@ AS
 			  (B.[SupplierId]  = @SupplierId OR @SupplierId = -1) AND
 			  ((I.[BillNumber] IS NOT NULL AND @FactureStatus = 1) OR 
 			  (I.[BillNumber] IS  NULL AND @FactureStatus = 2)  OR @FactureStatus = -1)
+	
+		ORDER BY B.DateCreated DESC
+
 	END

@@ -6,7 +6,7 @@
 <div class="_card">
     <h1 class="_card-title">Evidencija faktura</h1>
 
-    <div class="bill-actions">
+    <div class="invoice-actions">
         <div class="d-flex justify-content-between align-items-end">
             <form action="/Invoice/Search" id="searchForm">
                 <div class="form-group">
@@ -47,15 +47,15 @@
                         <i class="fas fa-ellipsis-v fa-fw"></i>
                     </a>
                     <div class="dropdown-menu card-dropdown fade" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/Bill/Create"><i class="fas fa-plus fa-sm fa-fw mr-2"></i>Novi racun</a>
+                        <a class="dropdown-item" href="/Invoice/Create"><i class="fas fa-plus fa-sm fa-fw mr-2"></i>Nova faktura</a>
                         <a class="dropdown-item" href="#"><i class="fas fa-file-export fa-sm fa-fw mr-2"></i>Export</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <table class="table">
-        <thead class="billTableTr">
+    <table class="table" id="invoiceTable">
+        <thead class="invoiceTableTr">
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.StoreId)
@@ -80,7 +80,7 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody id="factureTableData">
+        <tbody id="invoiceTableData">
             @foreach (var item in Model)
             {
                 var formattedDate = item.Date.ToString("MM/dd/yyyy");
@@ -109,16 +109,16 @@
                     <td class="text-right">
                         @if (item.BillNumber == "")
                         {
-                            <a href="#" class="action-link facture-link" id="@item.Id" onclick="showAddFactureModal(this);"><i class="fas fa-plus fa-fw"></i>&nbsp;Bill</a>
+                            <a href="#" class="action-link facture-link" id="@item.Id" onclick="showAddBillModal(this);"><i class="fas fa-plus fa-fw"></i>&nbsp;Racun</a>
                         }
-                        <a href="#" class="action-link edit-link" id="@item.Id" onclick="showUpdateBillModal(this);"><i class="fas fa-pen fa-fw"></i>&nbsp;Izmena</a>
+                        <a href="#" class="action-link edit-link" id="@item.Id" onclick="showUpdateInvoiceModal(this);"><i class="fas fa-pen fa-fw"></i>&nbsp;Izmena</a>
                         <a href="#" class="action-link details-link"><i class="fas fa-info fa-fw"></i>&nbsp;Detalji</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-    <div class="modal fade mt-5" id="editFactureModal">
+    <div class="modal fade mt-5" id="editInvoiceModal">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
 
@@ -136,3 +136,22 @@
         </div>
     </div>
 </div>
+
+
+@section Scripts {
+    <script src="~/js/datatables.min.js"></script>
+    <script src="~/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/js/moment.js"></script>
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+
+    <script src="~/js/invoice/validateInvoice.js"></script>
+    <script src="~/js/storesAndSuppliers.js"></script>
+    <script src="~/js/invoice/invoice.js"></script>
+
+    <link href="~/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <link href="~/css/datatables.min.css" rel="stylesheet" />
+    <link href="~/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+
+}

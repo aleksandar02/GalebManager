@@ -30,6 +30,11 @@ namespace GalebManager.Services
             return await _invoiceDal.GetAllInvoices();
         }
 
+        public async Task<IEnumerable<InvoiceDto>> SearchInvoices(InvoiceFilterDto filter)
+        {
+            return await _invoiceDal.SearchInvoices(filter);
+        }
+
         public async Task<InvoiceDto> GetInvoice(int id)
         {
             return await _invoiceDal.GetInvoice(id);
@@ -59,6 +64,11 @@ namespace GalebManager.Services
             invoice.UserCreated = collection["UserCreated"].ToString();
 
             return invoice;
+        }
+
+        public bool AddBill(int id, BillDto billDto)
+        {
+            return _invoiceDal.AddBill(id, billDto);
         }
     }
 }
